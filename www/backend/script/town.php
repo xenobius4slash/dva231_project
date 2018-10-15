@@ -1,0 +1,3 @@
+<?
+echo "town.php";
+?>
