@@ -48,7 +48,7 @@ if( isset($_GET['page']) ) {
 				<!-- NAVBAR LOGO -->
 
 				<div class="navbar-header">
-					<a href="#" class="navbar-brand">Weather</a>
+					<a href="index.php" class="navbar-brand">Weather</a>
 				</div>
 
 				<!-- LEFT PART OF THE NAVBAR -->
@@ -104,9 +104,15 @@ if( isset($_GET['page']) ) {
 			?> 
 		</section>
 
-		<footer>
-			FOOTER
+
+
+		<footer class="footer">
+		  <div>© 2018 Copyright:
+		    <a href="index.php"> Weather.com</a>
+		  </div>
 		</footer>
+
+
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
 
 		<script src="<?=JS_PATH?>bootstrap.js"></script>
