@@ -1,0 +1,7 @@
+<?php
+### login data to the MySQL Database
+define('DB_HOST', '');	// database server
+define('DB_USER', '');	// database user
+define('DB_PASS', '');	// database user password
+define('DB_BASE', '');	// database name
+?>

@@ -7,7 +7,23 @@ define('JS_PATH', 'frontend/js/');
 define('SCRIPT_PATH', 'backend/script/');
 define('CLASS_PATH', 'backend/class/');
 
-// choose template
+require_once CLASS_PATH.'Session.php';
+
+#############
+## Session ##
+#############
+$S = new Session();
+//echo "Session-ID: ".session_id()."<pre>"; print_r($_SESSION); echo "</pre>";
+$isLogin = false;
+if( (isset($_GET['logout'])) && ($_GET['logout'] == 1) ) {
+	$S->destroySession();
+} else {
+	if( $S->isLoggedIn() === true ) { $isLogin = true; } 
+}
+
+#####################
+## choose template ##
+#####################
 $page = '';
 $phpfile = false;
 if( isset($_GET['page']) ) {
@@ -22,8 +38,11 @@ if( isset($_GET['page']) ) {
 } else {
 	$page = 'home';
 }
-?>
 
+##############
+## skeleton ##
+##############
+?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
