@@ -33,10 +33,8 @@ if( isset($_GET['page']) ) {
 		<!-- Bootstrap -->
 		<link href="<?=CSS_PATH?>bootstrap.css" rel="stylesheet" type="text/css" />
 		<link href="<?=CSS_PATH?>index.css" rel="stylesheet" type="text/css" />
-		<!-- <link href="<?=CSS_PATH?>rpow.css" rel="stylesheet" type="text/css" /> -->
 
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-
 		<script src="<?=JS_PATH?>jquery-3.3.1.js"></script>
 
 	</head>
@@ -76,6 +74,17 @@ if( isset($_GET['page']) ) {
 			</div>
 		</nav>
 
+		<!-- main content -->
+		<section id="main_container" class="container">
+			<?php 
+				if($phpfile) { 
+					require_once SCRIPT_PATH.$page.'.php';
+				}
+				require_once TMPL_PATH.$page.'.tpl';
+			?> 
+		</section>
+
+		<!-- login dialog box -->
  		<div id="login-modal" class="modal fade" role="dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
  			<div class="modal-dialog modal-m">
  				<div class="loginmodal-container">
@@ -127,29 +136,13 @@ if( isset($_GET['page']) ) {
  			</div>
  		</div>
 
-
-
-		<section id="main_container">
-			<?php 
-				if($phpfile) { 
-					require_once SCRIPT_PATH.$page.'.php';
-				}
-				require_once TMPL_PATH.$page.'.tpl';
-			?> 
-		</section>
-
-
-
 		<footer class="footer">
 		  <div>© 2018 Copyright:
 		    <a href="index.php"> Weather.com</a>
 		  </div>
 		</footer>
 
-
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
-
 		<script src="<?=JS_PATH?>bootstrap.js"></script>
-
 	</body>
 </html>
