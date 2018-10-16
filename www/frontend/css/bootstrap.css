@@ -4055,7 +4055,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   top: auto;
   left: auto;
 }
-@media (min-width: 768px) {
+@media (max-width: 768px) { /* EDITED: ORIGINAL: @media (min-width: 768px) */
   .nav-tabs.nav-justified > li {
     display: table-cell;
     width: 1%;
@@ -5979,6 +5979,10 @@ button.close {
   }
   .modal-sm {
     width: 300px;
+  }
+
+  .modal-m {
+    width: 350px;
   }
 }
 @media (min-width: 992px) {

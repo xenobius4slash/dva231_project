@@ -69,8 +69,7 @@ if( isset($_GET['page']) ) {
 					<!-- RIGHT PART OF THE NAVBAR -->
 
 					<ul class="nav navbar-nav navbar-right">
-						<!-- <li><a href="#">Sign Up</a></li> -->
-						<li><a href="" data-toggle="modal" data-target="#login-modal">Login</a></li>
+						<li><a href="" data-toggle="modal" data-target="#login-modal">Sign In</a></li>
 					</ul>
 
 				</div>
@@ -78,16 +77,51 @@ if( isset($_GET['page']) ) {
 		</nav>
 
  		<div id="login-modal" class="modal fade" role="dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
- 			<div class="modal-dialog">
+ 			<div class="modal-dialog modal-m">
  				<div class="loginmodal-container">
- 					<h1 class="">Login to your account</h1>
- 					<form>
-					 	<input type="text" name="user" placeholder="Username">
-					 	<input type="password" name="pass" placeholder="Password">
-					 	<input type="submit" name="login" value="Login" class="btn btn-success loginmodal-submit">
-					</form>
-					<div class="loginmodal-a">
-						<a href="#">Register</a> - <a href="#">Forgot Password</a>
+					<!-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button> -->
+					 <!-- TABS LOGIN MODAL -->
+					<div class="bs-example bs-example-tabs">
+						<ul id="myTab" class="nav nav-tabs nav-justified">
+							<li class="active"><a href="#signin" data-toggle="tab">Sign In</a></li>
+							<li class=""><a href="#register" data-toggle="tab">Register</a></li>
+							<li class=""><a href="#why" data-toggle="tab">Why?</a></li>
+						</ul>
+					</div>
+
+					<!-- SWTICHING TABS -->
+					<div id="myTabContent" class="tab-content">
+						<!-- LOGIN TAB -->
+						<div class="tab-pane fade active in" id="signin">
+							<h1 class="">Login to your account</h1>
+							<form>
+								<input type="text" name="user" placeholder="E-mail">
+								<input type="password" name="pass" placeholder="Password">
+								<input type="submit" name="login" value="Login" class="btn btn-success loginmodal-submit">
+							</form>
+							<div class="loginmodal-a">
+								<a href="#">Forgot Password</a>
+							</div>
+						</div>
+
+						<!-- REGISTER TAB -->
+
+						<div class="tab-pane fade in" id="register">
+							<h1 class="">Create an account</h1>
+							<form>
+								<input type="text" name="email" placeholder="E-mail">
+								<input type="text" name="name" placeholder="Name">
+								<input type="password" name="pass" placeholder="Password">
+								<input type="password" name="passconfirm" placeholder="Re-Enter Password">
+								<input type="submit" name="signup" value="Sign Up" class="btn btn-success loginmodal-submit">
+							</form>
+						</div>
+
+						<!-- WHY TAB -->
+						<div class="tab-pane fade in" id="why">
+							<p>We need this information so that you can receive access to the site and its content. Rest assured your information will not be sold, traded, or given to anyone.</p>
+							<p></p><br> Please contact <a mailto:href="info@weather.com">info@wheather.com</a> for any other inquiries.</p>
+						</div>
 					</div>
  				</div>
  			</div>
