@@ -48,8 +48,9 @@ if( isset($_GET['page']) ) {
 	<head>
 		<meta charset="utf-8" />
 		<title>DVA231 - Weather Compare</title>
-
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<!-- Bootstrap -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 		<link href="<?=CSS_PATH?>bootstrap.css" rel="stylesheet" type="text/css" />
 		<link href="<?=CSS_PATH?>index.css" rel="stylesheet" type="text/css" />
 
@@ -74,13 +75,17 @@ if( isset($_GET['page']) ) {
 					<ul class="nav navbar-nav">
 						<li><a href="#">About</a></li>
 						<li><a href="#">Contact</a></li>
-						<form class="navbar-form navbar-left" role="search">
-							<div class="form-group">
-								<input type="text" class="form-control" placeholder="Search">
-							</div>
-						<button type="submit" class="btn btn-default">Submit</button>
-					</form>
-
+						<?php
+							if ($page != 'home') {
+								echo '<form class="navbar-form navbar-left" role="search">';
+								echo '<div class="form-group">';
+								echo '<input type="text" class="form-control" placeholder="Search">';
+								echo '</div>';
+								echo '&nbsp;';
+								echo '<button type="submit" class="btn btn-default">Submit</button>';
+								echo '</form>';
+							}
+						?>
 					</ul>
 
 					<!-- RIGHT PART OF THE NAVBAR -->

@@ -1,19 +1,11 @@
-<div class="row rstyle">
-	<div class="col-md-4 col-sm-6 box">
-		<div class="cstyle">
-			<p>Wheather: </p>
+<div class="background"></div>
+<div id="form-box">
+	<form method="GET" action="">
+		<div id="input-group">
+			<label for="search" class="glyphicon glyphicon-search"></label>
+			<input type="text" name="" placeholder="Search for a town.." id="search">
 		</div>
-	</div>
-	<!-- <div class="col-sm-1"></div> -->
-	<div class="col-md-4 col-sm-6 box">
-		<div class="cstyle">
-			Wheather
-		</div>
-	</div>
-	<!-- <div class="col-sm-1"></div> -->
-	<div class="col-md-4 col-sm-6 box">
-		<div class="cstyle">
-			Wheather
-		</div>
-	</div>
-</div>
+		<br/>
+		<button id="btn-search">Search</button>
+	</form>
+  </div>
