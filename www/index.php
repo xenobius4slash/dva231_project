@@ -136,9 +136,9 @@ if( isset($_GET['page']) ) {
 
 						<div class="tab-pane fade in" id="register">
 							<h1 class="">Create an account</h1>
-							<form>
+							<form method="post" action="backend/script/register.php">
 								<input type="text" name="email" placeholder="E-mail">
-								<input type="text" name="name" placeholder="Name">
+								<input type="text" name="username" placeholder="Username">
 								<input type="password" name="pass" placeholder="Password">
 								<input type="password" name="passconfirm" placeholder="Re-Enter Password">
 								<input type="submit" name="signup" value="Sign Up" class="btn btn-success loginmodal-submit">

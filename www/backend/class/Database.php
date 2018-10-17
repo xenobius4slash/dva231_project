@@ -1,5 +1,6 @@
 <?php
-require_once CONFIG_PATH.'mysql_login.inc.php';
+//require_once CONFIG_PATH.'mysql_login.inc.php';
+require_once '../config/mysql_login.inc.php';
 
 class Database {
 	private $db;
@@ -9,6 +10,7 @@ class Database {
 	/** create the connection with the database and set the charset to "utf8"
 	*/
 	function __construct() {
+		error_log(DB_HOST.", ".DB_USER.", ".DB_PASS.", ".DB_BASE);
 		$this->db =  mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_BASE);
 		if( mysqli_connect_errno() ) { 
 			error_log("Failed to connect to MySQL: (" . mysqli_connect_errno() . ") " . mysqli_connect_error()); 
