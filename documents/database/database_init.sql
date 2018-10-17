@@ -14,6 +14,7 @@ INSERT INTO user_level (id, name) VALUES(1, 'admin'),(2, 'superuser'),(3, 'user'
 
 CREATE TABLE IF NOT EXISTS user (
 	id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,		-- user-id
+	email VARCHAR(255) NOT NULL,						-- email address
 	name VARCHAR(100) NOT NULL,							-- username
 	password VARCHAR(100) NOT NULL,						-- hash of a password
 	level INTEGER NOT NULL,								-- user-level
