@@ -2,12 +2,39 @@
 require_once 'Database.php';
 
 class DatabaseUser extends Database {
+
+	/**	get user by email
+	*	@param		$email			String
+	*	@return		DB-Objekt
+	*/
+	public function getUserByEmail($email) {
+		$sqlQuery = sprintf("SELECT ".$this->getColumns()." FROM user WHERE LOWER(email) = LOWER('%s')", $this->escapeString($email) );
+		$result = $this->getDb()->query($sqlQuery);
+		if($result->num_rows > 0) {
+			return $result;
+		} else {
+			return null;
+		}
+	}
+
+	/**	check for exist of a user by email
+	*	@param		$email			String
+	*	@return		Bool
+	*/
+	public function existUserByEmail($email) {
+		if( $this->getUserByEmail($email) != null) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	/**	get user by username
 	*	@param		$username		String
 	*	@return		DB-Objekt
 	*/
 	public function getUserByUsername($username) {
-		$sqlQuery = sprintf("SELECT ".$this->getColumns()." FROM user WHERE username = '%s'", $this->escapeString($username) );
+		$sqlQuery = sprintf("SELECT ".$this->getColumns()." FROM user WHERE LOWER(name) = LOWER('%s')", $this->escapeString($username) );
 		$result = $this->getDb()->query($sqlQuery);
 		if($result->num_rows > 0) {
 			return $result;
@@ -55,13 +82,15 @@ class DatabaseUser extends Database {
 	}
 
 	/** insert a new user into the database
+	*	@param		$email					String
 	*	@param		$username				String
 	*	@param		$passwordHash			String
+	'	@param		$level					Integer (default: 3 => user)
 	*	@return		Bool
 	*/
-	public function insertNewUser($username, $passwordHash) {
-		$sqlQuery = sprintf("INSERT INTO user (username, password) 
-							VALUES('%s', '%s')", $this->escapeString($username), $this->escapeString($passwordHash) );
+	public function insertNewUser($email, $username, $passwordHash, $level = 3) {
+		$sqlQuery = sprintf("INSERT INTO user (email, name, password, level) VALUES('%s', '%s', '%s', %u)", 
+						$this->escapeString($email), $this->escapeString($username), $this->escapeString($passwordHash), $this->escapeString($level));
 		if( $this->getDb()->query($sqlQuery) ) {
 			return true;
 		} else {

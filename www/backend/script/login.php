@@ -4,29 +4,29 @@ require_once CLASS_PATH.'Session.php';
 require_once CLASS_PATH.'User.php';
 
 if( isset($_POST['login_submit']) ) {
-	$username = htmlspecialchars($_POST['login_username']);
+	$email = htmlspecialchars($_POST['login_email']);
 	$password = htmlspecialchars($_POST['login_password']);
+	$msg = '';
 
 	$U = new User();
-	if( !$U->isLoginAuthenticated($username, $password) ) {
+	if( !$U->isLoginAuthenticated($email, $password) ) {
 		error_log('[user] access denied');
+		$msg = 'access denied';
 	} else {
-		$userId = $U->getUserIdByUsername($username);
+		$userId = $U->getUserIdByEmail($email);
 		$S = new Session();
 		if( $S->generateNewSessionId() === false ) {
 			error_log('[session] Error while generating a new session id.');
+			$msg = 'Error while generating a new session id';
 		} else {
-			if( $S->insertNewSessionInDb($userId) === false ) {
-				error_log('[session] Error while saving the session id.');
+			if( !$S->setSessionUserId($userId) ) {
+				error_log("[session] Error while set the user-id in session.");
+				$msg = 'Error while set the user-id in session';
 			} else {
-				if( !$S->setSessionUserId($userId) ) {
-					error_log("[session] Error while set the username in session.");
-				} else {
-					header('Location: index.php');
-				}
+				header('Location: index.php');
 			}
 		}
 	}
 }
-header('Location: '.HTML_PATH.'login.php?login_fail=1');
+header('Location: '.INDEX_PATH.'login.php?login_fail=1&msg='.$msg);
 ?>

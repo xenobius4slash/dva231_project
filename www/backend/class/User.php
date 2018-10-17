@@ -6,6 +6,18 @@ class User {
 
 	function __destruct() { }
 
+	/**	check for valid email
+	*	@param		$email		String
+	*	@return		Bool
+	*/
+	public function isValidEmail($email) {
+		if(strlen($email) > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	/**	check for valid username
 	*	@param		$username		String
 	*	@return		Bool
@@ -50,12 +62,12 @@ class User {
 	}
 
 	/** check if the authentication is possible
-	*	@param		$username		String
+	*	@param		$email			String
 	*	@param		$password		String
 	*	@return		Bool
 	*/
-	public function isLoginAuthenticated($username, $password) {
-		$result = $this->getUserByUsername($username);
+	public function isLoginAuthenticated($email, $password) {
+		$result = $this->getUserByEmail($email);
 		if($result == null) {
 			return false;
 		} else {
@@ -101,7 +113,7 @@ class User {
 	*/
 	public function existUserByUsername($username) {
 		$DBU = new DatabaseUser();
-		$DBU->setDbColumns('username');
+		$DBU->setDbColumns('name');
 		if( $DBU->existUserByUsername($username) ) {
 			return true;
 		} else {
@@ -123,14 +135,42 @@ class User {
 		}
 	}
 
-	/** get the user-id from a user by username
-	*	@param		$username		String
+	/**	exist user by email
+	*	@param		$email		String
+	*	@return		Bool
+	*/
+	public function existUserByEmail($email) {
+		$DBU = new DatabaseUser();
+		$DBU->setDbColumns('email');
+		if( $DBU->existUserByEmail($email) ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/** get user by email
+	*	@param		$email		String
+	*	@return		Array
+	*/
+	public function getUserByEmail($email) {
+		$DBU = new DatabaseUser();
+		$result = $DBU->getUserByEmail($email);
+		if($result == null) {
+			return false;
+		} else {
+			return $DBU->getOneRowArrayFromSqlResult($result);
+		}
+	}
+
+	/** get the user-id from a user by email
+	*	@param		$email		String
 	*	@return		Integer
 	*/
-	public function getUserIdByUsername($username) {
+	public function getUserIdByEmail($email) {
 		$DBU = new DatabaseUser();
 		$DBU->setDbColumns('id');
-		$result = $DBU->getUserByUsername($username);
+		$result = $DBU->getUserByEmail($email);
 		if($result == null) {
 			return false;
 		} else {
@@ -140,23 +180,15 @@ class User {
 	}
 
 	/** insert a new user into the database
+	*	@param		$email				String
 	*	@param		$username			String
 	*	@param		$password			String
 	*	@return		Bool
 	*/
-	public function insertNewUserInDb($username, $password) {
-		if( ($this->isValidUsername($username)) && ($this->isValidPassword($password)) )
-		{
-			if( $this->existUserByUsername($username) ) {
-				return false;
-			} else {
-				$DBU = new DatabaseUser();
-				if( $DBU->insertNewUser($username, $this->getPasswordHashByPassword($password)) ) {
-					return true;
-				} else {
-					return false;
-				}
-			}
+	public function insertNewUserInDb($email, $username, $password) {
+		$DBU = new DatabaseUser();
+		if( $DBU->insertNewUser($email, $username, $this->getPasswordHashByPassword($password)) ) {
+			return true;
 		} else {
 			return false;
 		}
