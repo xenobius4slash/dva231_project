@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS weather_service (
 	id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,		-- weather-service-id
 	name VARCHAR(100) NOT NULL							-- name of the weather service
 );
-INSERT INTO weather_service (id, name, active) VALUES(1, 'apixu', 1),(2, 'open_weather_map', 1),(3, 'yahoo', 1); 
+INSERT INTO weather_service (id, name) VALUES(1, 'apixu'),(2, 'open_weather_map'),(3, 'yahoo'); 
 
 CREATE TABLE IF NOT EXISTS weather_data_current (
 	id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,		-- weather-data-current-id
