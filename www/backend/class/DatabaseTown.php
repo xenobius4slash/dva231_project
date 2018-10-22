@@ -5,7 +5,7 @@ class DatabaseTown extends Database {
 	private $expirationTime = 60;	// in minutes
 
 	private function getExpirationTime() {
-		return $this-> expirationTime();
+		return $this->expirationTime;
 	}
 
 	/** get all towns
@@ -26,7 +26,7 @@ class DatabaseTown extends Database {
 	*	@return		NULL || Array
 	*/
 	public function getTownById($id) {
-		$query = sprintf("SELECT ".$this->getColumns()." FROM town WHERE id = %u", $this->getArrayFromSqlResult($id) );
+		$query = sprintf("SELECT ".$this->getColumns()." FROM town WHERE id = %u", $this->escapeString($id) );
 		$result = $this->getDb()->query($query);
 		if($result->num_rows > 0) {
 			return $this->getOneRowArrayFromSqlResult($result);
@@ -52,8 +52,7 @@ class DatabaseTown extends Database {
 	*	@return		Array
 	*/
 	public function getTownsByLikeName($name) {
-		$query = sprintf("SELECT ".$this->getColumns()." FROM town WHERE LOWER(name) LIKE LOWER('%%%s%%')", 
-					$this->getArrayFromSqlResult($id) );
+		$query = sprintf("SELECT ".$this->getColumns()." FROM town WHERE LOWER(name) LIKE LOWER('%%%s%%')", $this->escapeString($id) );
 		$result = $this->getDb()->query($query);
 		if($result->num_rows > 0) {
 			return $this->getArrayFromSqlResult($result);
@@ -67,7 +66,7 @@ class DatabaseTown extends Database {
 	*	@return		Array
 	*/
 	public function getTownByName($name) {
-		$query = sprintf("SELECT ".$this->getColumns()." FROM town WHERE LOWER(name) = LOWER('%s')", $this->getArrayFromSqlResult($id) );
+		$query = sprintf("SELECT ".$this->getColumns()." FROM town WHERE LOWER(name) = LOWER('%s')", $this->escapeString($name) );
 		$result = $this->getDb()->query($query);
 		if($result->num_rows > 0) {
 			return $this->getOneRowArrayFromSqlResult($result);
@@ -82,7 +81,7 @@ class DatabaseTown extends Database {
 	*/
 	public function insertNewTown($name) {
 		if($this->getTownByName($name) === null) {
-			$query = sprintf("INSERT INTO town (name, last_update) VALUES('%s', NOW())", $this->getArrayFromSqlResult($name) );
+			$query = sprintf("INSERT INTO town (name, last_update) VALUES('%s', NOW())", $this->escapeString($name) );
 			return $this->getDb()->query($query);
 		} else {
 			return false;
@@ -94,7 +93,7 @@ class DatabaseTown extends Database {
 	*/
 	public function getAllOutdatedTowns() {
 		// condition: last_update < (now - expirationTime)
-		$query = sprintf("SELECT ".$this->getColumns()." FROM town WHERE last_update < DATE_SUB(NOW(), INTERVAL %u MINUTE)", $this->getArrayFromSqlResult($this->getExpirationTime()) );
+		$query = sprintf("SELECT ".$this->getColumns()." FROM town WHERE last_update < DATE_SUB(NOW(), INTERVAL %u MINUTE)", $this->escapeString($this->getExpirationTime()) );
 		$result = $this->getDb()->query($query);
 		if($result->num_rows > 0) {
 			return $this->igetArrayFromSqlResult($result);
@@ -108,7 +107,7 @@ class DatabaseTown extends Database {
 	*/
 	public function getAllUptodateTowns() {
 		// condition: last_update >= (now - expirationTime)
-		$query = sprintf("SELECT ".$this->getColumns()." FROM town WHERE last_update >= DATE_SUB(NOW(), INTERVAL %u MINUTE)", $this->getArrayFromSqlResult($this->getExpirationTime()) );
+		$query = sprintf("SELECT ".$this->getColumns()." FROM town WHERE last_update >= DATE_SUB(NOW(), INTERVAL %u MINUTE)", $this->escapeString($this->getExpirationTime()) );
 		$result = $this->getDb()->query($query);
 		if($result->num_rows > 0) {
 			return $this->getArrayFromSqlResult($result);
@@ -122,8 +121,21 @@ class DatabaseTown extends Database {
 	*	@return		Bool
 	*/
 	public function setTownToUptodateById($id) {
-		$query = sprintf("UPDATE town SET last_update = NOW() WHERE id = %u", $this->getArrayFromSqlResult($id) );
+		$query = sprintf("UPDATE town SET last_update = NOW() WHERE id = %u", $this->escapeString($id) );
 		return $this->getDb()->query($query);
+	}
+
+	/** is the given town up-to-date?
+	*	@param		$dbResult		Array
+	*	@return		Bool
+	*/
+	public function isTownUptodateByDbResult($array) {
+//		echo "if(".$array['last_update']." >= ".date('Y-m-d H:i:s', strtotime('-60 minutes') ).")\n";
+		if( strtotime($array['last_update']) >=  strtotime("-".$this->getExpirationTime()." minutes") ) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 }
 ?>

@@ -1,35 +1,61 @@
 <?php
-//require_once CONFIG_PATH.'mysql_login.inc.php';
-require_once '../config/mysql_login.inc.php';
+require_once CONFIG_PATH.'mysql_login.inc.php';
+//require_once '../config/mysql_login.inc.php';
 
 class Database {
 	private $db;
+	private $openConnection;
 	protected $columns = '*';
 	protected $order = '';
 
 	/** create the connection with the database and set the charset to "utf8"
+	*	only open a new connection if the parameter is not "false";
+	*	if $openConnection == "TRUE" then establishe a connection
+	*	if $openConnection == "FALSE" then don't establishe a connection because of there exist one
+	*	@param		$openConnection			Bool
 	*/
-	function __construct() {
-		$this->db =  mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_BASE);
-		if( mysqli_connect_errno() ) { 
-			error_log("Failed to connect to MySQL: (" . mysqli_connect_errno() . ") " . mysqli_connect_error()); 
-		} else {
-//			error_log("Database connection established.");
-			if (!$this->db->set_charset("utf8")) {
-				error_log("Error loading character set utf8: ". $this->db->error);
-			} 
-//			else { error_log("Current character set: ". $this->db->character_set_name() ); }
+	function __construct( $openConnection = true) {
+		$this->openConnection = $openConnection;
+		if( $openConnection ) {
+			$this->db =  mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_BASE);
+			if( mysqli_connect_errno() ) { 
+				error_log("Failed to connect to MySQL: (" . mysqli_connect_errno() . ") " . mysqli_connect_error()); 
+			} else {
+//				error_log("Database connection established.");
+				if (!$this->db->set_charset("utf8")) {
+					error_log("Error loading character set utf8: ". $this->db->error);
+				} 
+//				else { error_log("Current character set: ". $this->db->character_set_name() ); }
+			}
 		}
 	}
 
 	/** close the connection to the database
 	*/
 	function __destruct() {
-		mysqli_close($this->db);
+		if( $this->openConnection ) {
+			mysqli_close($this->db);
+		}
 	}
 
 	public function getDb() {
 		return $this->db;
+	}
+
+	public function getLastInsertedId() {
+		return $this->getDb()->insert_id;
+	}
+
+	public function startTransaction() {
+		$this->getDb()->begin_transaction();
+	}
+
+	public function commitTransaction() {
+		$this->getDb()->commit();
+	}
+
+	public function rollbackTransaction() {
+		$this->getDb()->rollback();
 	}
 
 	/** get the current columns
