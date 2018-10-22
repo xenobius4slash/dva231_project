@@ -35,3 +35,26 @@ CREATE TABLE IF NOT EXISTS user_town (
 	FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE,
 	FOREIGN KEY (town_id) REFERENCES town(id) ON DELETE CASCADE
 );
+
+CREATE TABLE IF NOT EXISTS weather_service (
+	id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,		-- weather-service-id
+	name VARCHAR(100) NOT NULL							-- name of the weather service
+);
+INSERT INTO weather_service (id, name, active) VALUES(1, 'apixu', 1),(2, 'open_weather_map', 1),(3, 'yahoo', 1); 
+
+CREATE TABLE IF NOT EXISTS weather_data_current (
+	id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,		-- weather-data-current-id
+	town_id INTEGER NOT NULL,							-- reference to town.id
+	weather_service_id INTEGER NOT NULL,				-- reference to weather_service.id
+	latest TINYINT(1) NOT NULL,							-- Boolean: 0 => not the latest, 1 => is the latest
+	build_date DATETIME NOT NULL,						-- build datetime of the data by weather service
+	temp_c DECIMAL(10,1),								-- temperature in celsius
+	temp_f DECIMAL(10,1),								-- temperature in fahrenheit
+	sky_condition VARCHAR(100),							-- condition of the sky
+	wind_speed_mph DECIMAL(10,1),						-- wind speed in miles per hour
+	wind_degree DECIMAL(10,1),							-- wind degree/direction in °
+	pressure_hpa DECIMAL(10,1),							-- pressure in hectopascal
+	humidity INTEGER,									-- humidity in %
+	FOREIGN KEY (town_id) REFERENCES town(id) ON DELETE CASCADE,
+	FOREIGN KEY (weather_service_id) REFERENCES weather_service(id) ON DELETE CASCADE
+);

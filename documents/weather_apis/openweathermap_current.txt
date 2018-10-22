@@ -1,0 +1,58 @@
+OpenWeatherMap
+Array
+(
+    [coord] => Array
+        (
+            [lon] => 2.35
+            [lat] => 48.86
+        )
+
+    [weather] => Array
+        (
+            [0] => Array
+                (
+                    [id] => 800
+                    [main] => Clear
+                    [description] => clear sky
+                    [icon] => 01n
+                )
+
+        )
+
+    [base] => stations
+    [main] => Array
+        (
+            [temp] => 13.49
+            [pressure] => 1025
+            [humidity] => 76
+            [temp_min] => 12
+            [temp_max] => 14
+        )
+
+    [visibility] => 7000
+    [wind] => Array
+        (
+            [speed] => 2.6
+            [deg] => 340
+        )
+
+    [clouds] => Array
+        (
+            [all] => 0
+        )
+
+    [dt] => 1539972000
+    [sys] => Array
+        (
+            [type] => 1
+            [id] => 5610
+            [message] => 0.0084
+            [country] => FR
+            [sunrise] => 1539929879
+            [sunset] => 1539967925
+        )
+
+    [id] => 2988507
+    [name] => Paris
+    [cod] => 200
+)

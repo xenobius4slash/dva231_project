@@ -1,0 +1,215 @@
+Yahoo
+Array
+(
+    [query] => Array
+        (
+            [count] => 1
+            [created] => 2018-10-19T18:21:10Z
+            [lang] => de-DE
+            [results] => Array
+                (
+                    [channel] => Array
+                        (
+                            [units] => Array
+                                (
+                                    [distance] => mi
+                                    [pressure] => in
+                                    [speed] => mph
+                                    [temperature] => F
+                                )
+
+                            [title] => Yahoo! Weather - Paris, Ile-de-France, FR
+                            [link] => http://us.rd.yahoo.com/dailynews/rss/weather/Country__Country/*https://weather.yahoo.com/country/state/city-615702/
+                            [description] => Yahoo! Weather for Paris, Ile-de-France, FR
+                            [language] => en-us
+                            [lastBuildDate] => Fri, 19 Oct 2018 08:21 PM CEST
+                            [ttl] => 60
+                            [location] => Array
+                                (
+                                    [city] => Paris
+                                    [country] => France
+                                    [region] =>  Ile-de-France
+                                )
+
+                            [wind] => Array
+                                (
+                                    [chill] => 59
+                                    [direction] => 0
+                                    [speed] => 13
+                                )
+
+                            [atmosphere] => Array
+                                (
+                                    [humidity] => 68
+                                    [pressure] => 1016.0
+                                    [rising] => 0
+                                    [visibility] => 16.1
+                                )
+
+                            [astronomy] => Array
+                                (
+                                    [sunrise] => 8:18 am
+                                    [sunset] => 6:52 pm
+                                )
+
+                            [image] => Array
+                                (
+                                    [title] => Yahoo! Weather
+                                    [width] => 142
+                                    [height] => 18
+                                    [link] => http://weather.yahoo.com
+                                    [url] => http://l.yimg.com/a/i/brand/purplelogo//uh/us/news-wea.gif
+                                )
+
+                            [item] => Array
+                                (
+                                    [title] => Conditions for Paris, Ile-de-France, FR at 07:00 PM CEST
+                                    [lat] => 48.85693
+                                    [long] => 2.3412
+                                    [link] => http://us.rd.yahoo.com/dailynews/rss/weather/Country__Country/*https://weather.yahoo.com/country/state/city-615702/
+                                    [pubDate] => Fri, 19 Oct 2018 07:00 PM CEST
+                                    [condition] => Array
+                                        (
+                                            [code] => 29
+                                            [date] => Fri, 19 Oct 2018 07:00 PM CEST
+                                            [temp] => 61
+                                            [text] => Partly Cloudy
+                                        )
+
+                                    [forecast] => Array
+                                        (
+                                            [0] => Array
+                                                (
+                                                    [code] => 30
+                                                    [date] => 19 Oct 2018
+                                                    [day] => Fri
+                                                    [high] => 64
+                                                    [low] => 51
+                                                    [text] => Partly Cloudy
+                                                )
+
+                                            [1] => Array
+                                                (
+                                                    [code] => 30
+                                                    [date] => 20 Oct 2018
+                                                    [day] => Sat
+                                                    [high] => 65
+                                                    [low] => 50
+                                                    [text] => Partly Cloudy
+                                                )
+
+                                            [2] => Array
+                                                (
+                                                    [code] => 32
+                                                    [date] => 21 Oct 2018
+                                                    [day] => Sun
+                                                    [high] => 65
+                                                    [low] => 45
+                                                    [text] => Sunny
+                                                )
+
+                                            [3] => Array
+                                                (
+                                                    [code] => 30
+                                                    [date] => 22 Oct 2018
+                                                    [day] => Mon
+                                                    [high] => 61
+                                                    [low] => 50
+                                                    [text] => Partly Cloudy
+                                                )
+
+                                            [4] => Array
+                                                (
+                                                    [code] => 30
+                                                    [date] => 23 Oct 2018
+                                                    [day] => Tue
+                                                    [high] => 62
+                                                    [low] => 43
+                                                    [text] => Partly Cloudy
+                                                )
+
+                                            [5] => Array
+                                                (
+                                                    [code] => 30
+                                                    [date] => 24 Oct 2018
+                                                    [day] => Wed
+                                                    [high] => 67
+                                                    [low] => 50
+                                                    [text] => Partly Cloudy
+                                                )
+
+                                            [6] => Array
+                                                (
+                                                    [code] => 28
+                                                    [date] => 25 Oct 2018
+                                                    [day] => Thu
+                                                    [high] => 65
+                                                    [low] => 50
+                                                    [text] => Mostly Cloudy
+                                                )
+
+                                            [7] => Array
+                                                (
+                                                    [code] => 28
+                                                    [date] => 26 Oct 2018
+                                                    [day] => Fri
+                                                    [high] => 62
+                                                    [low] => 47
+                                                    [text] => Mostly Cloudy
+                                                )
+
+                                            [8] => Array
+                                                (
+                                                    [code] => 30
+                                                    [date] => 27 Oct 2018
+                                                    [day] => Sat
+                                                    [high] => 56
+                                                    [low] => 45
+                                                    [text] => Partly Cloudy
+                                                )
+
+                                            [9] => Array
+                                                (
+                                                    [code] => 12
+                                                    [date] => 28 Oct 2018
+                                                    [day] => Sun
+                                                    [high] => 56
+                                                    [low] => 43
+                                                    [text] => Rain
+                                                )
+
+                                        )
+
+                                    [description] => <![CDATA[<img src="http://l.yimg.com/a/i/us/we/52/29.gif"/>
+<BR />
+<b>Current Conditions:</b>
+<BR />Partly Cloudy
+<BR />
+<BR />
+<b>Forecast:</b>
+<BR /> Fri - Partly Cloudy. High: 64Low: 51
+<BR /> Sat - Partly Cloudy. High: 65Low: 50
+<BR /> Sun - Sunny. High: 65Low: 45
+<BR /> Mon - Partly Cloudy. High: 61Low: 50
+<BR /> Tue - Partly Cloudy. High: 62Low: 43
+<BR />
+<BR />
+<a href="http://us.rd.yahoo.com/dailynews/rss/weather/Country__Country/*https://weather.yahoo.com/country/state/city-615702/">Full Forecast at Yahoo! Weather</a>
+<BR />
+<BR />
+<BR />
+]]>
+                                    [guid] => Array
+                                        (
+                                            [isPermaLink] => false
+                                        )
+
+                                )
+
+                        )
+
+                )
+
+        )
+
+)

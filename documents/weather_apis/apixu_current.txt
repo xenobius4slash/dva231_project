@@ -1,0 +1,46 @@
+Apixu
+Array
+(
+    [location] => Array
+        (
+            [name] => Paris
+            [region] => Ile-de-France
+            [country] => France
+            [lat] => 48.87
+            [lon] => 2.33
+            [tz_id] => Europe/Paris
+            [localtime_epoch] => 1539973208
+            [localtime] => 2018-10-19 20:20
+        )
+
+    [current] => Array
+        (
+            [last_updated_epoch] => 1539972921
+            [last_updated] => 2018-10-19 20:15
+            [temp_c] => 14
+            [temp_f] => 57.2
+            [is_day] => 0
+            [condition] => Array
+                (
+                    [text] => Clear
+                    [icon] => //cdn.apixu.com/weather/64x64/night/113.png
+                    [code] => 1000
+                )
+
+            [wind_mph] => 6.9
+            [wind_kph] => 11.2
+            [wind_degree] => 20
+            [wind_dir] => NNE
+            [pressure_mb] => 1024
+            [pressure_in] => 30.7
+            [precip_mm] => 0
+            [precip_in] => 0
+            [humidity] => 77
+            [cloud] => 0
+            [feelslike_c] => 13.3
+            [feelslike_f] => 55.9
+            [vis_km] => 6
+            [vis_miles] => 3
+        )
+
+)

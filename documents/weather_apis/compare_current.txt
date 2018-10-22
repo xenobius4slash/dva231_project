@@ -1,0 +1,39 @@
+Current
+=======
+
+Apixu
+-----
+last_update		[current][last_updated_epoch] => 1539956722
+temp_c			[current][temp_c] => decimal
+sky				[current][condition][text] => string
+sky_icon		[current][condition][icon] => URL
+wind_speed_mph	[current][wind_mph] => decimal
+wind_degree		[current][wind_degree] => integer	(Wind direction in degrees)
+pressure_hpa	[current][pressure_mb] => decimal	(mb == hpa)
+humidity		[current][humidity] => integer (%)
+
+
+OpenWeatherMap
+--------------
+last_update 	[dt] => 1485789600
+temp_c			[main][temp] => float	(units=metric)
+sky				[weather][0][main] => text
+sky_icon		[weather][0][icon] => code
+wind_speed_mph	mpsToMph([wind][speed] => float)
+wind_degree		[wind][deg] => float 	(Wind direction, degrees (meteorological))
+pressure_hpa	[main][pressure] => float (hpa)
+humidity		[main][humidity] => integer (%)
+
+
+Yahoo
+-----
+=> forecast
+last_update 	[query][results][channel][lastBuildDate] => Fri, 19 Oct 2018 08:21 PM CEST
+temp_c			[query][results][channel][item][condition][temp] => integer	(u="c")
+sky				[query][results][channel][item][condition][text] => string
+sky_icon		---
+wind_speed_mph	kmhToMph([query][results][channel][wind][speed] => integer)
+wind_degree		[query][results][channel][wind][direction] => integer		(wind direction, in degrees)
+pressure_hpa	[query][results][channel][atmosphere][pressure] => float	(u="c")
+humidity		[query][results][channel][atmosphere][humidity] => integer	(%) 
+
