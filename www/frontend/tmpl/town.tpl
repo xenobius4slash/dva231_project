@@ -1,4 +1,3 @@
-<!-- usage of the php variables short: <?=$...?> -->
 <div>
 <p><h3><?=$town?></h3></p>
 <p><b>Apixu</b></p>
