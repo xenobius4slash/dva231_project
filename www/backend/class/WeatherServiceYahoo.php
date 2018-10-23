@@ -2,7 +2,10 @@
 require_once 'WeatherService.php';
 
 class WeatherServiceYahoo extends WeatherService implements WeatherServiceInterface {
-	private $test = true;
+	private $test = false;
+	private $curlError = false;
+	private $curlErrorCode;
+	private $curlErrorMessage;
 	private	$weatherServiceId = 3;
 	private $weatherServiceName = 'yahoo';
 	private $creditName = 'Powered by Yahoo!';
@@ -10,11 +13,68 @@ class WeatherServiceYahoo extends WeatherService implements WeatherServiceInterf
 	private $resultWeatherService;
 	private $resultDatabase;
 
+	/** enable the test, so the results are comming from stored results	*/
+	public function enableTest() {
+		$this->test = true;
+	}
+
 	/**	get the weather service results from the class
 	*	@return		Array
 	*/
 	private function getResultWS() {
 		return $this->resultWeatherService;
+	}
+
+	public function getCurlError() {
+		return $this->curlError;
+	}
+
+	private function setCurlError() {
+		$this->curlError = true;
+	}
+
+	public function getCurlErrorCode() {
+		return $this->curlErrorCode;
+	}
+
+	private function setCurlErrorCode($code) {
+		$this->curlErrorCode = $code;
+	}
+
+	public function getCurlErrorMessage() {
+		return $this->curlErrorMessage;
+	}
+
+	private function setCurlErrorMessage($msg) {
+		$this->curlErrorMessage = $msg;
+	}
+
+	/** check for errors in the result and set error-code and error-message in class
+	*	=> no doc regarding errors
+	*	error-result: {"query":{"count":0,"created":"2018-10-23T10:29:33Z","lang":"de-DE","results":null}}
+	*	error-result: {"error":{"lang":"en-US","description":"No definition found for Table weather"}}
+	*	error-result: 
+	*	@param		&$result			reference to Array
+	*	@return		Bool
+	*/
+	private function isCurlError($result) {
+		if( isset($result['query']) && isset($result['query']['count']) ) {
+			if( $result['query']['count'] == 0 ) {
+				$this->setCurlErrorCode('self');
+				$this->setCurlErrorMessage('No location found matching parameter');
+				$this->setCurlError();
+				return true;
+			} else {
+				return false;
+			}
+		} elseif( isset($result['error']) ) {
+			$this->setCurlErrorCode('yahoo');
+			$this->setCurlErrorMessage($result['error']['descirption']);
+			error_log("[cURL result error] yahoo: ".$this->getCurlErrorCode()." => ".$this->getCurlErrorMessage());
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/** set the results from the weather service in the class

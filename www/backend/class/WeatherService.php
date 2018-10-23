@@ -178,6 +178,7 @@ class WeatherService {
 
 	/** TEST */
 	public function getTestResult($service, $option) {
+		error_log("[TEST-MODE] receive stored results ($service, $option)");
 		$return = null;
 		$TEST = new test();
 		switch($service) {

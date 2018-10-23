@@ -6,9 +6,9 @@ require_once 'WeatherServiceOpenWeatherMap.php';
 require_once 'WeatherServiceYahoo.php';
 require_once 'DatabaseWeatherDataCurrent.php';
 
-#$town = 'Paris';
+$town = 'Paris';
 #$town = 'Berlin';
-$town = 'London';
+#$town = 'London';
 
 $townId = null;
 $DBT = new DatabaseTown();
@@ -25,8 +25,11 @@ if($resultTown === null) {
 }
 
 $WSA = new WeatherServiceApixu();
+$WSA->enableTest();
 $WSOWM = new WeatherServiceOpenWeatherMap();
+$WSOWM->enableTest();
 $WSY = new WeatherServiceYahoo();
+$WSY->enableTest();
 
 $townUptodate = null;
 if( $DBT->isTownUptodateByDbResult($resultTown) ) {
@@ -38,9 +41,21 @@ if( $DBT->isTownUptodateByDbResult($resultTown) ) {
 } else {
 	echo "town is NOT up-to-date => receive data from API call\n";
 	$townUptodate = false;
-	$WSA->loadResultByTownApi($town);
-	$WSOWM->loadResultByTownApi($town);
-	$WSY->loadResultByTownApi($town);
+	if( !$WSA->loadResultByTownApi($town) ) {
+		if( $WSA->getCurlError() ) {
+			echo "cURL Error: ".$WSA->getCurlErrorCode()." => ".$WSA->getCurlErrorMessage();
+		}
+	}
+	if( !$WSOWM->loadResultByTownApi($town) ) {
+		if( $WSOWM->getCurlError() ) {
+			echo "cURL Error: ".$WSOWM->getCurlErrorCode()." => ".$WSOWM->getCurlErrorMessage();
+		}
+	}
+	if( !$WSY->loadResultByTownApi($town) ) {
+		if( $WSA->getCurlError() ) {
+			echo "cURL Error: ".$WSY->getCurlErrorCode()." => ".$WSY->getCurlErrorMessage();
+		}
+	}
 }
 
 echo "\nApixu\n"; 

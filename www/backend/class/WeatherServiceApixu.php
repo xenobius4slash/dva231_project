@@ -4,7 +4,10 @@ require_once 'WeatherService.php';
 /**	weather conditions: http://www.apixu.com/doc/Apixu_weather_conditions.xml
 */
 class WeatherServiceApixu extends WeatherService implements WeatherServiceInterface {
-	private $test = true;
+	private $test = false;
+	private $curlError = false;
+	private $curlErrorCode;
+	private $curlErrorMessage;
 	private	$weatherServiceId = 1;
 	private $weatherServiceName = 'apixu';
 	private $creditName = 'Powered by Apixu.com';
@@ -13,6 +16,11 @@ class WeatherServiceApixu extends WeatherService implements WeatherServiceInterf
 	private $resultWeatherService;
 	private $resultDatabase;
 
+	/** enable the test, so the results are comming from stored results	*/
+	public function enableTest() {
+		$this->test = true;
+	}
+
 	/**	get the weather service results from the class
 	*	@return		Array
 	*/
@@ -20,17 +28,72 @@ class WeatherServiceApixu extends WeatherService implements WeatherServiceInterf
 		return $this->resultWeatherService;
 	}
 
+	public function getCurlError() {
+		return $this->curlError;
+	}
+
+	private function setCurlError() {
+		$this->curlError = true;
+	}
+
+	public function getCurlErrorCode() {
+		return $this->curlErrorCode;
+	}
+
+	private function setCurlErrorCode($code) {
+		$this->curlErrorCode = $code;
+	}
+
+	public function getCurlErrorMessage() {
+		return $this->curlErrorMessage;
+	}
+
+	private function setCurlErrorMessage($msg) {
+		$this->curlErrorMessage = $msg;
+	}
+
+	/** check for errors in the result and set error-code and error-message in class
+	*	https://www.apixu.com/doc/errors.aspx
+	*	error-result: {"error":{"code":<error-code>,"message":"<message>"}}
+	*	HTTP code		error-code		message
+	*	401				1002			API key not provided.
+	*	400				1003			Parameter 'q' not provided.
+	*	400				1005			API request url is invalid
+	*	400				1006			No location found matching parameter 'q'
+	*	401				2006			API key provided is invalid
+	*	403				2007			API key has exceeded calls per month quota.
+	*	403				2008			API key has been disabled.
+	*	400				9999			Internal application error.
+	*	@param		&$result			reference to Array
+	*	@return		Bool
+	*/
+	private function isCurlError($result) {
+		if( isset($result['error']) ) {
+			$this->setCurlErrorCode($result['error']['code']);
+			$this->setCurlErrorMessage($result['error']['message']);
+			$this->setCurlError();
+			error_log("[cURL result error] apixu: ".$this->getCurlErrorCode()." => ".$this->getCurlErrorMessage());
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	/** set the results from the weather service in the class
 	*	@param		$array			Array
 	*	@return		Bool
 	*/
 	private function setResultWS($array) {
-		$this->resultWeatherService = $array;
-		$this->resultDatabase = null;
-		if( is_array( $this->getResultWS() ) ) {
-			return true;
-		} else {
+		if( $this->isCurlError($array) ) {
 			return false;
+		} else {
+			$this->resultWeatherService = $array;
+			$this->resultDatabase = null;
+			if( is_array( $this->getResultWS() ) ) {
+				return true;
+			} else {
+				return false;
+			}
 		}
 	}
 

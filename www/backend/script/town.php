@@ -30,8 +30,11 @@ if($resultTown === null) {	// town not in the database => insert
 *	init classes of weather services
 */
 $WSA = new WeatherServiceApixu();
+$WSA->enableTest();
 $WSOWM = new WeatherServiceOpenWeatherMap();
+$WSOWM->enableTest();
 $WSY = new WeatherServiceYahoo();
+$WSY->enableTest();
 
 /*
 *	is town up-to-date?

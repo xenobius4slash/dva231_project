@@ -4,7 +4,10 @@ require_once 'WeatherService.php';
 /** weather conditions: https://openweathermap.org/weather-conditions
 */
 class WeatherServiceOpenWeatherMap extends WeatherService implements WeatherServiceInterface {
-	private $test = true;
+	private $test = false;
+	private $curlError = false;
+	private $curlErrorCode;
+	private $curlErrorMessage;
 	private	$weatherServiceId = 2;
 	private $weatherServiceName = 'open_weather_map';
 	private $creditName = 'Powered by openweather.co.uk';
@@ -13,11 +16,59 @@ class WeatherServiceOpenWeatherMap extends WeatherService implements WeatherServ
 	private $resultWeatherService;
 	private $resultDatabase;
 
+	/** enable the test, so the results are comming from stored results	*/
+	public function enableTest() {
+		$this->test = true;
+	}
+
 	/**	get the weather service results from the class
 	*	@return		Array
 	*/
 	private function getResultWS() {
 		return $this->resultWeatherService;
+	}
+
+	public function getCurlError() {
+		return $this->curlError;
+	}
+
+	private function setCurlError() {
+		$this->curlError = true;
+	}
+
+	public function getCurlErrorCode() {
+		return $this->curlErrorCode;
+	}
+
+	private function setCurlErrorCode($code) {
+		$this->curlErrorCode = $code;
+	}
+
+	public function getCurlErrorMessage() {
+		return $this->curlErrorMessage;
+	}
+
+	private function setCurlErrorMessage($msg) {
+		$this->curlErrorMessage = $msg;
+	}
+
+	/** check for errors in the result and set error-code and error-message in class
+	*	=> no doc regarding error-codes
+	*	error-result: {"cod":"<error-code>","message":"<message>"}
+	*	error-result: 
+	*	@param		&$result			reference to Array
+	*	@return		Bool
+	*/
+	private function isCurlError($result) {
+		if( isset($result['cod']) && isset($result['message']) ) {
+			$this->setCurlErrorCode($result['cod']);
+			$this->setCurlErrorMessage($result['message']);
+			$this->setCurlError();
+			error_log("[cURL result error] open weather map: ".$this->getCurlErrorCode()." => ".$this->getCurlErrorMessage());
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/** set the results from the weather service in the class
