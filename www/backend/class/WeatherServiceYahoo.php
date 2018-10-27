@@ -186,15 +186,15 @@ class WeatherServiceYahoo extends WeatherService implements WeatherServiceInterf
     public function getTemperature() {
 		if( $this->getResultWS() !== null && $this->getResultDB() === null ) {
 			if( $this->getTempUnit() == 'celsius' ) {
-				return round($this->getResultWS()['query']['results']['channel']['item']['condition']['temp'],1);
+				return round($this->getResultWS()['query']['results']['channel']['item']['condition']['temp'],0);
 			} else {
 				return $this->convertCelsiusToFahrenheit($this->getResultWS()['query']['results']['channel']['item']['condition']['temp']);
 			}
 		} elseif( $this->getResultWS() === null && $this->getResultDB() !== null ) {
 			if( $this->getTempUnit() == 'celsius' ) {
-				return round($this->getResultDB()['temp_c'],1);
+				return round($this->getResultDB()['temp_c'],0);
 			} else {
-				return round($this->getResultDB()['temp_f'],1);
+				return round($this->getResultDB()['temp_f'],0);
 			}
 		}
 	}
@@ -211,32 +211,27 @@ class WeatherServiceYahoo extends WeatherService implements WeatherServiceInterf
 		if( $this->getResultWS() !== null && $this->getResultDB() === null ) {
 			return $this->convertKilometrePerHourToMilesPerHour($this->getResultWS()['query']['results']['channel']['wind']['speed']);
 		} elseif( $this->getResultWS() === null && $this->getResultDB() !== null ) {
-			return round($this->getResultDB()['wind_speed_mph'],1);
+			return round($this->getResultDB()['wind_speed_mph'],0);
 		}
 	}
 
     public function getWindDegree() {
 		if( $this->getResultWS() !== null && $this->getResultDB() === null ) {
-			return round($this->getResultWS()['query']['results']['channel']['wind']['direction'],1);
+			return round($this->getResultWS()['query']['results']['channel']['wind']['direction'],0);
 		} elseif( $this->getResultWS() === null && $this->getResultDB() !== null ) {
-			return round($this->getResultDB()['wind_degree'],1);
+			return round($this->getResultDB()['wind_degree'],0);
 		}
 	}
 
     public function getPressureHpa() {
 		if( $this->getResultWS() !== null && $this->getResultDB() === null ) {
 			// there is an error in the API, which provide the wrong unit
-			$pressureCorrected;
 			$pressureApi = $this->getResultWS()['query']['results']['channel']['atmosphere']['pressure'];
-			if($this->getTempUnit() == 'celsius') {
-				$errorConstant = 33.7685;
-				$pressureCorrected = $pressureApi / $errorConstant;
-			} else {
-				$pressureCorrected = $pressureApi;
-			}
-			return round($pressureCorrected ,1);
+			$errorConstant = 33.7685;
+			$pressureCorrected = $pressureApi / $errorConstant;
+			return round($pressureCorrected ,0);
 		} elseif( $this->getResultWS() === null && $this->getResultDB() !== null ) {
-			return round($this->getResultDB()['pressure_hpa'],1);
+			return round($this->getResultDB()['pressure_hpa'],0);
 		}
 	}
 

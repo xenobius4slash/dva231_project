@@ -193,15 +193,15 @@ class WeatherServiceApixu extends WeatherService implements WeatherServiceInterf
 	public function getTemperature() {
 		if( $this->getResultWS() !== null && $this->getResultDB() === null ) {
 			if( $this->getTempUnit() == 'celsius' ) {
-				return round($this->getResultWS()['current']['temp_c'],1);
+				return round($this->getResultWS()['current']['temp_c'],0);
 			} else {
 				return $this->convertCelsiusToFahrenheit($this->getResultWS()['current']['temp_c']);
 			}
 		} elseif( $this->getResultWS() === null && $this->getResultDB() !== null ) {
 			if( $this->getTempUnit() == 'celsius' ) {
-				return round($this->getResultDB()['temp_c'],1);
+				return round($this->getResultDB()['temp_c'],0);
 			} else {
-				return round($this->getResultDB()['temp_f'],1);
+				return round($this->getResultDB()['temp_f'],0);
 			}
 		}
 	}
@@ -216,25 +216,25 @@ class WeatherServiceApixu extends WeatherService implements WeatherServiceInterf
 
     public function getWindSpeed() {
 		if( $this->getResultWS() !== null && $this->getResultDB() === null ) {
-			return round($this->getResultWS()['current']['wind_mph'],1);
+			return round($this->getResultWS()['current']['wind_mph'],0);
 		} elseif( $this->getResultWS() === null && $this->getResultDB() !== null ) {
-			return round($this->getResultDB()['wind_speed_mph'],1);
+			return round($this->getResultDB()['wind_speed_mph'],0);
 		}
 	}
 
     public function getWindDegree() {
 		if( $this->getResultWS() !== null && $this->getResultDB() === null ) {
-			return round($this->getResultWS()['current']['wind_degree'],1);
+			return round($this->getResultWS()['current']['wind_degree'],0);
 		} elseif( $this->getResultWS() === null && $this->getResultDB() !== null ) {
-			return round($this->getResultDB()['wind_degree'],1);
+			return round($this->getResultDB()['wind_degree'],0);
 		}
 	}
 
     public function getPressureHpa() {
 		if( $this->getResultWS() !== null && $this->getResultDB() === null ) {
-			return round($this->getResultWS()['current']['pressure_mb'],1);
+			return round($this->getResultWS()['current']['pressure_mb'],0);
 		} elseif( $this->getResultWS() === null && $this->getResultDB() !== null ) {
-			return round($this->getResultDB()['pressure_hpa'],1);
+			return round($this->getResultDB()['pressure_hpa'],0);
 		}
 	}
 

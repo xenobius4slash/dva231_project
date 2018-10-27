@@ -181,15 +181,15 @@ class WeatherServiceOpenWeatherMap extends WeatherService implements WeatherServ
 	public function getTemperature() {
 		if( $this->getResultWS() !== null && $this->getResultDB() === null ) {
 			if( $this->getTempUnit() == 'celsius' ) {
-				return round($this->getResultWS()['main']['temp'],1);
+				return round($this->getResultWS()['main']['temp'],0);
 			} else {
 				return $this->convertCelsiusToFahrenheit($this->getResultWS()['main']['temp']);
 			}
 		} elseif( $this->getResultWS() === null && $this->getResultDB() !== null ) {
 			if( $this->getTempUnit() == 'celsius' ) {
-				return round($this->getResultDB()['temp_c'],1);
+				return round($this->getResultDB()['temp_c'],0);
 			} else {
-				return round($this->getResultDB()['temp_f'],1);
+				return round($this->getResultDB()['temp_f'],0);
 			}
 		}
 	}
@@ -206,23 +206,23 @@ class WeatherServiceOpenWeatherMap extends WeatherService implements WeatherServ
 		if( $this->getResultWS() !== null && $this->getResultDB() === null ) {
 			return $this->convertMetrePerSecondToMilesPerHour($this->getResultWS()['wind']['speed']);
 		} elseif( $this->getResultWS() === null && $this->getResultDB() !== null ) {
-			return round($this->getResultDB()['wind_speed_mph'],1);
+			return round($this->getResultDB()['wind_speed_mph'],0);
 		}
 	}
 
     public function getWindDegree() {
 		if( $this->getResultWS() !== null && $this->getResultDB() === null ) {
-			return round($this->getResultWS()['wind']['deg'],1);
+			return round($this->getResultWS()['wind']['deg'],0);
 		} elseif( $this->getResultWS() === null && $this->getResultDB() !== null ) {
-			return round($this->getResultDB()['wind_degree'],1);
+			return round($this->getResultDB()['wind_degree'],0);
 		}
 	}
 
     public function getPressureHpa() {
 		if( $this->getResultWS() !== null && $this->getResultDB() === null ) {
-			return round($this->getResultWS()['main']['pressure'],1);
+			return round($this->getResultWS()['main']['pressure'],0);
 		} elseif( $this->getResultWS() === null && $this->getResultDB() !== null ) {
-			return round($this->getResultDB()['pressure_hpa'],1);
+			return round($this->getResultDB()['pressure_hpa'],0);
 		}
 	}
 

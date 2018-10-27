@@ -106,7 +106,7 @@ class WeatherService {
 	*/
 	public function convertMetrePerSecondToMilesPerHour($value) {
 		if(is_numeric($value)) {
-			return round( ($value * 2.2369), 1);
+			return round( ($value * 2.2369), 0);
 		} else {
 			return false;
 		}
@@ -118,7 +118,7 @@ class WeatherService {
 	*/
 	public function convertKilometrePerHourToMilesPerHour($value) {
 		if(is_numeric($value)) {
-			return round( ($value * 0.6214), 1);
+			return round( ($value * 0.6214), 0);
 		} else {
 			return false;
 		}
@@ -130,7 +130,7 @@ class WeatherService {
 	*/
 	public function convertCelsiusToFahrenheit($value) {
 		if(is_numeric($value)) {
-			return round( ($value * 1.8 + 32), 1);
+			return round( ($value * 1.8 + 32), 0);
 		} else {
 			return false;
 		}
