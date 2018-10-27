@@ -126,9 +126,9 @@ class WeatherServiceApixu extends WeatherService implements WeatherServiceInterf
 	*/
 	private function getUrlByOptions($town) {
 		if($this->getMode() == 'current') {
-			return $this->baseUrl.'current.json?key='.$this->apiKey.'&q='.$town;
+			return $this->baseUrl.'current.json?key='.$this->apiKey.'&q='.urlencode($town);
 		} elseif($this->getMode() == 'forecast') {
-			return $this->baseUrl.'forecast.json?key='.$this->apiKey.'&q='.$town.'&days=5';
+			return $this->baseUrl.'forecast.json?key='.$this->apiKey.'&q='.urlencode($town).'&days=5';
 		} else {
 			return null;
 		}
@@ -156,7 +156,7 @@ class WeatherServiceApixu extends WeatherService implements WeatherServiceInterf
 				if( $result === false ) {
 					return false;
 				} else {
-					if( $this->setResultWS( $this->getArrayFromJson( $this->getResultByCurlRequest($url) ) ) === false ) {
+					if( $this->setResultWS( $this->getArrayFromJson($result) ) === false ) {
 						return false;
 					} else {
 						return true;

@@ -114,9 +114,9 @@ class WeatherServiceOpenWeatherMap extends WeatherService implements WeatherServ
 	*/
 	private function getUrlByOptions($town) {
 		if($this->getMode() == 'current') {
-			return $this->baseUrl.'weather?q='.$town.'&appid='.$this->apiKey.'&units=metric';
+			return $this->baseUrl.'weather?q='.urlencode($town).'&appid='.$this->apiKey.'&units=metric';
 		} elseif($this->getMode() == 'forecast') {
-			return $this->baseUrl.'forecast?q='.$town.'&appid='.$this->apiKey.'&units=metric';
+			return $this->baseUrl.'forecast?q='.urlencode($town).'&appid='.$this->apiKey.'&units=metric';
 		} else {
 			return null;
 		}
@@ -144,7 +144,7 @@ class WeatherServiceOpenWeatherMap extends WeatherService implements WeatherServ
 				if( $result === false ) {
 					return false;
 				} else {
-					if( $this->setResultWS( $this->getArrayFromJson( $this->getResultByCurlRequest($url) ) ) === false ) {
+					if( $this->setResultWS( $this->getArrayFromJson($result) ) === false ) {
 						return false;
 					} else {
 						return true;

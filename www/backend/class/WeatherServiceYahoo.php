@@ -149,7 +149,7 @@ class WeatherServiceYahoo extends WeatherService implements WeatherServiceInterf
 				if( $result === false ) {
 					return false;
 				} else {
-					if( $this->setResultWS( $this->getArrayFromJson( $this->getResultByCurlRequest($url) ) ) === false ) {
+					if( $this->setResultWS( $this->getArrayFromJson($result) ) === false ) {
 						return false;
 					} else {
 						return true;
@@ -225,7 +225,16 @@ class WeatherServiceYahoo extends WeatherService implements WeatherServiceInterf
 
     public function getPressureHpa() {
 		if( $this->getResultWS() !== null && $this->getResultDB() === null ) {
-			return round($this->getResultWS()['query']['results']['channel']['atmosphere']['pressure'],1);
+			// there is an error in the API, which provide the wrong unit
+			$pressureCorrected;
+			$pressureApi = $this->getResultWS()['query']['results']['channel']['atmosphere']['pressure'];
+			if($this->getTempUnit() == 'celsius') {
+				$errorConstant = 33.7685;
+				$pressureCorrected = $pressureApi / $errorConstant;
+			} else {
+				$pressureCorrected = $pressureApi;
+			}
+			return round($pressureCorrected ,1);
 		} elseif( $this->getResultWS() === null && $this->getResultDB() !== null ) {
 			return round($this->getResultDB()['pressure_hpa'],1);
 		}

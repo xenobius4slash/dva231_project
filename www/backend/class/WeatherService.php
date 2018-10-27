@@ -142,12 +142,14 @@ class WeatherService {
 	*	@return		FALSE || JSON
 	*/
 	public function getResultByCurlRequest($url) {
+//		error_log("API Call: '".$url."'");
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $url);
 		curl_setopt($ch, CURLOPT_HEADER, 0);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		$result = curl_exec($ch);
 		curl_close($ch);
+//		error_log("JSON: $result");
 		return $result;
 	}
 
