@@ -50,6 +50,12 @@ if( isset($_POST['signup']) ) {
 								$return['error'] = true;
 								$return['code'] = 7;
 								$return['msg'] = 'Internal error #4';
+								if(!$U->$setDefaultSettings($UserId){
+									// ERROR: error while inserting default settings
+									$return['error'] = true;
+									$return['code'] = 8;
+									$return['msg'] = 'Internal error #5';
+								}
 							} else {
 								$return['error'] = false;
 							}
