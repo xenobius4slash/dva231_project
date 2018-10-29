@@ -6,6 +6,7 @@ class User {
 
 	function __destruct() { }
 
+	private $defaultSettings->backgroundColor = "white"; $defaultSettings->unit = "celsius"; $defaultSettings = Json_encode($defaultSettings);	//Default settings for users
 	/**	check for valid email
 	*	@param		$email		String
 	*	@return		Bool
@@ -193,5 +194,53 @@ class User {
 			return false;
 		}
 	}
+	
+	/** get the settings from a user by user-id
+	*	@param		$user-id		integer
+	*	@return		JSONObject
+	*/
+	
+	public function getUserSettings($userId){
+		$DBU = new DatabaseUser();
+		$DBU->setDbColumns('settings');
+		$result = $DBU->getUserSettings($userId);
+		if($result == null) {
+			return false;
+		} else {
+			$result = $DBU->getOneRowArrayFromSqlResult($result);
+			return $result['settings'];
+		}
+	}
+	
+	/** set the settings for a user by user-id
+	*	@param		$user-id		integer
+	*	@param		JSONObject
+	*	@return 		bool
+	*/
+	
+	Public function setUserSettings($userId, $settings){
+		$DBU = new DatabaseUser();
+		if( $DBU->setUserSettings($userId, $settings){
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
+	/** set the settings for a user by user-id
+	*	@param		$user-id		integer
+	*	@return 		bool
+	*/
+	
+	public function setDefaultSettings($userId)
+	{
+		$U = new User();
+		if( $U->setUserSettings($userId, $defaultSettings){
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
 }
 ?>
