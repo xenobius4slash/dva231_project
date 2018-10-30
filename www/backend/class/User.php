@@ -6,12 +6,6 @@ class User {
 
 	function __destruct() { }
 	
-	public function getDefaultSettings (){
-		$defaultSettings->backgroundColor = "white";
-		$defaultSettings->unit = "celsius";
-		$defaultJsonSettings = Json_encode($defaultSettings);	//Default settings for users
-		return $defaultSettingsJson;
-	}
 	
 	/**	check for valid email
 	*	@param		$email		String
@@ -240,8 +234,12 @@ class User {
 	
 	public function setDefaultSettings($userId)
 	{
+		$defaultSettings = new \stdClass();
+		$defaultSettings->unit = "celsius";
+		$defaultSettings = Json_encode($defaultSettings);	//Default settings for users
+		
 		$U = new User();
-		if( $U->setUserSettings($userId, $U->getDefaultSettings() ) ) {
+		if( $U->setUserSettings($userId, $defaultSettings ) ) {
 			return true;
 		}else {
 			return false;

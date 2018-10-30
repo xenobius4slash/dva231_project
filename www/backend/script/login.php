@@ -38,7 +38,6 @@ if( isset($_POST['login_submit']) ) {
 	if($return['error'] === false) {
 		header('Location: '.INDEX_PATH.'index.php');
 	} else {
-	$return['msg'] = 'i dont know';
 		header('Location: '.INDEX_PATH.'login.php?login_fail=1&error_code='.$return['code'].'&msg='.$return['msg']);
 	}
 }
