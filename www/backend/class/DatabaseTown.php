@@ -137,5 +137,18 @@ class DatabaseTown extends Database {
 			return false;
 		}
 	}
+
+	/** delete all towns
+	*	@return		Bool
+	*/
+	public function deleteAllTowns() {
+		$query = sprintf("DELETE FROM town");
+		$result = $this->getDb()->query($query);
+		if($result === true) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
 ?>

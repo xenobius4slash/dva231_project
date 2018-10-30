@@ -97,5 +97,19 @@ class DatabaseUser extends Database {
 			return false;
 		}
 	}
+
+	/** delete a user
+	*	@param		$userId			Integer
+	*	@return		Bool
+	*/
+	public function deleteUserById($userId) {
+		$query = sprintf("DELETE FROM user WHERE id = %u", $this->escapeString($userId) );
+		$result = $this->getDb()->query($query);
+		if($result === true) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
 ?>
