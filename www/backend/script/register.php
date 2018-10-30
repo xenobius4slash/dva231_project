@@ -50,7 +50,7 @@ if( isset($_POST['signup']) ) {
 								$return['error'] = true;
 								$return['code'] = 7;
 								$return['msg'] = 'Internal error #4';
-								if(!$U->$setDefaultSettings($UserId){
+								if(!$U->setDefaultSettings($UserId) ) {
 									// ERROR: error while inserting default settings
 									$return['error'] = true;
 									$return['code'] = 8;
@@ -68,7 +68,7 @@ if( isset($_POST['signup']) ) {
 	if($return['error'] === false) {
 		header('Location: '.INDEX_PATH.'index.php');
 	} else {
-		header('Location: '.INDEX_PATH.'index.php?register_fail=1&error_code='.$return['code'].'&msg='.$return['msg']);
+		header('Location: '.INDEX_PATH.'register.php?register_fail=1&error_code='.$return['code'].'&msg='.$return['msg']);
 	}
 }
 ?>

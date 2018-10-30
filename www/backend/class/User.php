@@ -2,11 +2,15 @@
 require_once 'DatabaseUser.php';
 
 class User {
-	function __construct() { }
+	function __construct() { 
+		$defaultSettings->backgroundColor = "white";
+		$defaultSettings->unit = "celsius";
+		$defaultSettings = Json_encode($defaultSettings);	//Default settings for users
+	}
 
 	function __destruct() { }
 
-	private $defaultSettings->backgroundColor = "white"; $defaultSettings->unit = "celsius"; $defaultSettings = Json_encode($defaultSettings);	//Default settings for users
+	
 	/**	check for valid email
 	*	@param		$email		String
 	*	@return		Bool
@@ -220,7 +224,7 @@ class User {
 	
 	Public function setUserSettings($userId, $settings){
 		$DBU = new DatabaseUser();
-		if( $DBU->setUserSettings($userId, $settings){
+		if( $DBU->setUserSettings($userId, $settings) ) {
 			return true;
 		}else {
 			return false;
@@ -235,7 +239,7 @@ class User {
 	public function setDefaultSettings($userId)
 	{
 		$U = new User();
-		if( $U->setUserSettings($userId, $defaultSettings){
+		if( $U->setUserSettings($userId, $defaultSettings) ) {
 			return true;
 		}else {
 			return false;
