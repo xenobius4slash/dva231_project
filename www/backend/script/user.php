@@ -80,7 +80,7 @@ if( isset($_POST['settings_saved']) ) {
 		header('Location: '.INDEX_PATH.'index.php');
 	} else {
 	
-		header('Location: '.INDEX_PATH.'settings.php?settings_fail=1&error_code='.$return['code'].'&msg='.$return['msg']);
+		header('Location: '.INDEX_PATH.'user.php?settings_fail=1&error_code='.$return['code'].'&msg='.$return['msg']);
 	}
 }
 
