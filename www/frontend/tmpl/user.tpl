@@ -1,21 +1,23 @@
 <div class="background"></div>
-<div id="weatherBox" style="float: left; margin-right: 5%; width:1014px; height:320px; margin-bottom:5%">
 	<div id="form-box" style="margin-top: 50px;">
 		<form method="GET" action="">
-			<div id="input-group">
-			Change username:
-				<input type="username" name="" placeholder="Enter new username..." id="username" style="border:none;">
+			<h1 style="text-align:left; margin-left:25%">User settings</h1>
+			<div id="input-group" style="text-align:left; padding-left:10px; width: 50%;">
+				<label for="username" class="">Change username:</label>
+				<input type="username" name="" placeholder="Enter new username..." id="username" style="border:none; line-height: 40px; width: 70%;">
 			</div>
 			<br>
-			<div id="input-group">
-			Change email address:
-				<input type="emailaddress" name="" placeholder="Enter new emailaddress..." id="emailaddress" style="border:none;">
+			<div id="input-group" style="text-align:left; padding-left:10px; width: 50%; ">
+				<label for="username" class="">Change email address:</label>
+				<input type="emailaddress" name="" placeholder="Enter new email address..." id="emailaddress" style="border:none; line-height: 40px; width: 65%;">
 			</div>
 			<br/>
-			<input type="radio" name="degreeType" value="male"> Celsius<br>
-			<input type="radio" name="degreeType" value="female"> Fahrenheit<br>
-			<button id="btn-apply">Apply changes</button>
+			<div id="input-group" style="text-align:left; padding-left:10px; width: 12%;">
+				<input type="radio" name="degreeType" value="celsius"><b> Celsius</b><br>
+				<input type="radio" name="degreeType" value="fahrenheit"><b> Fahrenheit</b><br>
+			</div>
+			<br>
+			<button id="btn-apply" style="padding: 6px 20px;border: none;border-radius: 5px;background-color: rgb(212, 10, 20);color: #fff;">Apply changes</button>
 		</form>
 	  </div>
-	</div>
 </div>
