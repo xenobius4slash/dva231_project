@@ -70,28 +70,18 @@ if( !isset($_POST['town_search']) || !isset($_POST['town']) || (strlen($_POST['t
 		}
 	}
 
-	// check for errors
-	if( !$townUptodate && $WSA->getCurlError() && $WSOWM->getCurlError() && $WSA->getCurlError() ) {
-		/*
-		*	if all services set the error
-		*		=> delete town from database
-		*		=> don't try to insert values in the database
-		*/
-		$DBT->deleteTownById($townId);
-	} else {
-		/*
-		*	if town NOT up-to-date then insert new data into the database
-		*/
-		if($townUptodate === false) {
-			$DBWDC = new DatabaseWeatherDataCurrent();
-			$return = $DBWDC->insertNewLatestDataForWeatherServices($townId, array($WSA->getArrayForDatabase(), $WSOWM->getArrayForDatabase(), $WSY->getArrayForDatabase()));
+	/*
+	*	if town NOT up-to-date then insert new data into the database
+	*/
+	if($townUptodate === false) {
+		$DBWDC = new DatabaseWeatherDataCurrent();
+		$return = $DBWDC->insertNewLatestDataForWeatherServices($townId, array($WSA->getArrayForDatabase(), $WSOWM->getArrayForDatabase(), $WSY->getArrayForDatabase()));
 		
-			if( $return ) {
-				// set town to up-to-date
-				$DBT->setTownToUptodateById($townId);
-			} 
-			else { echo '<div class="alert alert-danger">ERROR while inserting the new values in the database</div>'; }
-		}
+		if( $return ) {
+			// set town to up-to-date
+			$DBT->setTownToUptodateById($townId);
+		} 
+		else { echo '<div class="alert alert-danger">ERROR while inserting the new values in the database</div>'; }
 	}
 }
 ?>

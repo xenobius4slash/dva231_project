@@ -18,10 +18,9 @@ interface WeatherServiceInterface {
 	public function loadResultByTownIdDb($townId);
 
 	/**	get the last updated timestamp from the loaded results
-	*	@param		$db				Bool	(for using return for database should be true)
 	*	@return		Timestamp
 	*/
-	public function getLastUpdate($db=false);
+	public function getLastUpdate();
 
 	/** get the temperature in celsius from the loaded results
 	*	@return		Float
