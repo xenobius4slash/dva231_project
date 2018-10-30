@@ -119,7 +119,7 @@ class DatabaseUser extends Database {
 	*/
 	
 	public function getUserSettings($userId) {
-		$sqlQuery = sprintf("SELECT ".$this->getColumns()." FROM user WHERE LOWER(userId) = LOWER('%s')", $this->escapeString($userId) );
+		$sqlQuery = sprintf("SELECT ".$this->getColumns()." FROM user WHERE id = %u", $this->escapeString($userId) );
 		$result = $this->getDb()->query($sqlQuery);
 		if($result->num_rows > 0) {
 			return $result;
