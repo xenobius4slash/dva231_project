@@ -46,8 +46,9 @@ class Session {
 		if( isset($_SESSION['timeout']) ) {
 			$duration = time() - (int)$_SESSION['timeout'];
 			if( (isset($_SESSION['uid'])) && (intval($_SESSION['uid'])) && ($duration <= $this->getExpirationSeconds()) ) {
+				require_once CLASS_PATH.'DatabaseUser.php';
 				$DBU = new DatabaseUser();
-				$DBS->setDbColumns('id');
+				$DBU->setDbColumns('id');
 				if( $DBU->existUserById($_SESSION['uid']) ) {
 					$_SESSION['timeout'] = time();
 					return true;
@@ -94,6 +95,7 @@ class Session {
 	public function setSessionUserId($userId) {
 		if( $this->getSessionId() != '') {
 			$_SESSION['uid'] = $userId;
+			$_SESSION['timeout'] = time();
 			return true;
 		} else {
 			return false;

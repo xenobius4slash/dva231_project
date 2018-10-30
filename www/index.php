@@ -18,7 +18,14 @@ $isLogin = false;
 if( (isset($_GET['logout'])) && ($_GET['logout'] == 1) ) {
 	$S->destroySession();
 } else {
-	if( $S->isLoggedIn() === true ) { $isLogin = true; } 
+	if( $S->isLoggedIn() === true ) { 
+		require_once CLASS_PATH.'User.php';
+		$userId = $S->getSessionUserId();
+		$U = new User();
+		$user = $U->getUserById($userId);
+		$username = $user['name'];
+		$isLogin = true;
+	} 
 }
 
 #####################
@@ -91,11 +98,18 @@ if( isset($_GET['page']) ) {
 					</ul>
 
 					<!-- RIGHT PART OF THE NAVBAR -->
-
-					<ul class="nav navbar-nav navbar-right" id="login">
-						<li><a href="" data-toggle="modal" data-target="#login-modal">Sign In</a></li>
-					</ul>
-
+					<?php if($isLogin) { ?>
+						<ul class="nav navbar-nav navbar-right" id="logout">
+							<li><a href="index.php?logout=1">Logout</a></li>
+						</ul>
+						<ul class="nav navbar-nav navbar-right" id="user_page">
+							<li><a href="index.php?page=user&id=<?=$userId?>"><?=$username?></a></li>
+						</ul>
+					<?php } else { ?>
+						<ul class="nav navbar-nav navbar-right" id="login">
+							<li><a href="" data-toggle="modal" data-target="#login-modal">Sign In</a></li>
+						</ul>
+					<?php } ?>
 				</div>
 			</div>
 		</nav>
