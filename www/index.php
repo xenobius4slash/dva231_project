@@ -92,7 +92,7 @@ if( isset($_GET['page']) ) {
 
 					<!-- RIGHT PART OF THE NAVBAR -->
 
-					<ul class="nav navbar-nav navbar-right">
+					<ul class="nav navbar-nav navbar-right" id="login">
 						<li><a href="" data-toggle="modal" data-target="#login-modal">Sign In</a></li>
 					</ul>
 
@@ -129,10 +129,10 @@ if( isset($_GET['page']) ) {
 						<!-- LOGIN TAB -->
 						<div class="tab-pane fade active in" id="signin">
 							<h1 class="">Login to your account</h1>
-							<form>
-								<input type="text" name="user" placeholder="E-mail">
-								<input type="password" name="pass" placeholder="Password">
-								<input type="submit" name="login" value="Login" class="btn btn-success loginmodal-submit">
+							<form method="post" action="backend\script\login.php" >
+								<input type="text" name="login_email" placeholder="E-mail">
+								<input type="password" name="login_password" placeholder="Password">
+								<input type="submit" name="login_submit" value="Login" class="btn btn-success loginmodal-submit">
 							</form>
 							<div class="loginmodal-a">
 								<a href="#">Forgot Password</a>
