@@ -39,8 +39,8 @@ if( isset($_GET['page']) ) {
 		case 'home' : $page = 'home';  break;
 		case 'town' : $page = 'town'; $phpfile = true; break;
 		case 'test' : $page = 'test'; $phpfile = true; break;
-		case 'user' : $page = 'user'; $phpfile = false; break;
-//		case 'admin' : if($admin) { $page = 'admin'; $phpfile = true; } else { $page = 'home'; } break;
+		case 'user' : $page = 'user'; $phpfile = true; break;
+		case 'admin' : if($admin) { $page = 'admin'; $phpfile = true; } else { $page = 'home'; } break;
 //		case 'imprint': $page = 'imprint'; break;
 		default : $page = 'home';
 	}
