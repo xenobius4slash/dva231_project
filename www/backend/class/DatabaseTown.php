@@ -35,6 +35,20 @@ class DatabaseTown extends Database {
 		}
 	}
 
+	/** get many towns by town-ids
+	*	@param		$stringIds			String
+	*	@return		NULL || Array
+	*/
+	public function getTownByIds($stringIds) {
+		$query = sprintf("SELECT ".$this->getColumns()." FROM town WHERE id IN(%s) ".$this->getOrder(), $this->escapeString($stringIds) );
+		$result = $this->getDb()->query($query);
+		if($result->num_rows > 0) {
+			return $this->getArrayFromSqlResult($result);
+		} else {
+			return null;
+		}
+	}
+
 	/** check for existing of a town by tonw-id
 	*	@param		$id		Integer
 	*	@return		Bool

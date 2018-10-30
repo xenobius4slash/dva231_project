@@ -7,7 +7,6 @@
 	</p>
 
 <div id="weatherBox" style="float: left; margin-right: 5%; width:1014px; height:220px; margin-bottom:5%">
-	
 	<table style="text-align:center; margin-top:40px;">
 	<tr><td rowspan="2" height="120px" width="300px"><h1 id="printAvgTemp" style="font-size:100px;"></h1></td><td width="200px"><img src="frontend/img/wind_speed.png" alt="Wind Speed" width="100"></td><td width="200px"><img src="frontend/img/humidity.png" alt="Humidity" width="100"></td><td width="200px"><img src="frontend/img/pressure.png" alt="Pressure" width="100"></td></td></tr>
 	<tr style="font-size:20px;"><td id="printAvgWind" style="color:#333;">Wind</td><td id="printAvgHum" style="color:#333;">Hum</td><td id="printAvgPre" style="color:#333;">Pre</td></tr>
