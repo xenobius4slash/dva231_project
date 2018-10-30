@@ -25,7 +25,7 @@ class DatabaseUserSettings extends Database {
 	*/
 	
 	public function setUserSettings($userId, $settings) {
-		$sqlQuery = sprintf("INSERT INTO user WHERE id = (userId) (settings) VALUES('%s')", 
+		$sqlQuery = sprintf("UPDATE user SET settings = (settings) WHERE id = (userId)", 
 						$this->escapeString($userId), $this->escapeString($settings));
 		if( $this->getDb()->query($sqlQuery) ) {
 			return true;
