@@ -151,5 +151,20 @@ class DatabaseUser extends Database {
 			return false;
 		}
 	}
+
+	/** check if the given user id is an admin
+	*	@param		$userId			Integer
+	*	@return		Bool
+	*/
+	public function isAdminByUserId($userId) {
+		$sqlQuery = sprintf("SELECT ".$this->getColumns()." FROM user WHERE id = %u AND level = 1", $this->escapeString($userId) );
+		$result = $this->getDb()->query($sqlQuery);
+		if($result->num_rows > 0) {
+			return true;
+		} else {
+			return false;
+		}
+
+	}
 }
 ?>

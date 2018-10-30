@@ -16,6 +16,7 @@ require_once CLASS_PATH.'Session.php';
 $S = new Session();
 //echo "Session-ID: ".session_id()."<pre>"; print_r($_SESSION); echo "</pre>";
 $isLogin = false;
+$admin = false;
 if( (isset($_GET['logout'])) && ($_GET['logout'] == 1) ) {
 	$S->destroySession();
 } else {
@@ -26,6 +27,11 @@ if( (isset($_GET['logout'])) && ($_GET['logout'] == 1) ) {
 		$user = $U->getUserById($userId);
 		$username = $user['name'];
 		$isLogin = true;
+		if( $U->isAdmin($userId) ) {
+			$admin = true;
+		} else {
+			$admin = false;
+		}
 	} 
 }
 
@@ -105,6 +111,11 @@ if( isset($_GET['page']) ) {
 						<ul class="nav navbar-nav navbar-right" id="user_page">
 							<li><a href="index.php?page=user&id=<?=$userId?>"><?=$username?></a></li>
 						</ul>
+						<?php if($admin) { ?>
+							<ul class="nav navbar-nav navbar-right" id="admin_page">
+								<li><a href="index.php?page=admin">Administration</a></li>
+							</ul>
+						<?php } ?>
 					<?php } else { ?>
 						<ul class="nav navbar-nav navbar-right" id="login">
 							<li><a href="" data-toggle="modal" data-target="#login-modal">Sign In</a></li>
