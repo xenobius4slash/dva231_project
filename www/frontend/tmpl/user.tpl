@@ -1,6 +1,6 @@
 <div class="background"></div>
 	<div id="form-box" style="margin-top: 50px;">
-		<form method="POST" action="backend/script/user.php">
+		<form method="POST" action="index.php?page=user">
 			<h1 style="text-align:left; margin-left:25%">User settings</h1>
 			<div id="input-group" style="text-align:left; padding-left:10px; width: 50%;">
 				<label for="username" class="">Change username:</label>
