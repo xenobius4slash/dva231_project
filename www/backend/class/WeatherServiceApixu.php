@@ -138,7 +138,7 @@ class WeatherServiceApixu extends WeatherService implements WeatherServiceInterf
 	*	@return		Array
 	*/
 	public function getArrayForDatabase() {
-		$array = $this->getArrayOfOneWeatherServiceForDatabaseByData($this->getLastUpdate(),$this->getTemperature(),$this->getSky(),$this->getWindSpeed(),$this->getWindDegree(),$this->getPressureHpa(),$this->getHumidity());
+		$array = $this->getArrayOfOneWeatherServiceForDatabaseByData($this->getLastUpdate(true),$this->getTemperature(),$this->getSky(),$this->getWindSpeed(),$this->getWindDegree(),$this->getPressureHpa(),$this->getHumidity());
 		return array('weather_service_id' => $this->weatherServiceId, 'weather_service_name' => $this->weatherServiceName, 'data' => $array );
 	}
 
@@ -181,68 +181,100 @@ class WeatherServiceApixu extends WeatherService implements WeatherServiceInterf
 		}
 	}
 
-    public function getLastUpdate() {
-		if( $this->getResultWS() !== null && $this->getResultDB() === null ) {
-			$result = $this->getResultWS()['current']['last_updated_epoch'];
-			return date('Y-m-d H:i:s', $result);
-		} elseif( $this->getResultWS() === null && $this->getResultDB() !== null ) {
-			return $this->getResultDB()['build_date'];
+    public function getLastUpdate($db=false) {
+		if( $this->getCurlError() ) {
+			return '---';
+		} else {
+			if( $this->getResultWS() !== null && $this->getResultDB() === null ) {
+				$result = $this->getResultWS()['current']['last_updated_epoch'];
+				if($db) {
+					return date('Y-m-d H:i:s', $result);
+				} else {
+					return date('j M Y, H:i', $result);
+				}
+			} elseif( $this->getResultWS() === null && $this->getResultDB() !== null ) {
+				return date('j M Y, H:i', strtotime($this->getResultDB()['build_date']));
+			}
 		}
 	}
 
 	public function getTemperature() {
-		if( $this->getResultWS() !== null && $this->getResultDB() === null ) {
-			if( $this->getTempUnit() == 'celsius' ) {
-				return round($this->getResultWS()['current']['temp_c'],0);
-			} else {
-				return $this->convertCelsiusToFahrenheit($this->getResultWS()['current']['temp_c']);
-			}
-		} elseif( $this->getResultWS() === null && $this->getResultDB() !== null ) {
-			if( $this->getTempUnit() == 'celsius' ) {
-				return round($this->getResultDB()['temp_c'],0);
-			} else {
-				return round($this->getResultDB()['temp_f'],0);
+		if( $this->getCurlError() ) {
+			return '---';
+		} else {
+			if( $this->getResultWS() !== null && $this->getResultDB() === null ) {
+				if( $this->getTempUnit() == 'celsius' ) {
+					return round($this->getResultWS()['current']['temp_c'],0);
+				} else {
+					return $this->convertCelsiusToFahrenheit($this->getResultWS()['current']['temp_c']);
+				}
+			} elseif( $this->getResultWS() === null && $this->getResultDB() !== null ) {
+				if( $this->getTempUnit() == 'celsius' ) {
+					return round($this->getResultDB()['temp_c'],0);
+				} else {
+					return round($this->getResultDB()['temp_f'],0);
+				}
 			}
 		}
 	}
 
     public function getSky() {
-		if( $this->getResultWS() !== null && $this->getResultDB() === null ) {
-			return $this->getResultWS()['current']['condition']['text'];
-		} elseif( $this->getResultWS() === null && $this->getResultDB() !== null ) {
-			return $this->getResultDB()['sky_condition'];
+		if( $this->getCurlError() ) {
+			return '---';
+		} else {
+			if( $this->getResultWS() !== null && $this->getResultDB() === null ) {
+				return $this->getResultWS()['current']['condition']['text'];
+			} elseif( $this->getResultWS() === null && $this->getResultDB() !== null ) {
+				return $this->getResultDB()['sky_condition'];
+			}
 		}
 	}
 
     public function getWindSpeed() {
-		if( $this->getResultWS() !== null && $this->getResultDB() === null ) {
-			return round($this->getResultWS()['current']['wind_mph'],0);
-		} elseif( $this->getResultWS() === null && $this->getResultDB() !== null ) {
-			return round($this->getResultDB()['wind_speed_mph'],0);
+		if( $this->getCurlError() ) {
+			return '---';
+		} else {
+			if( $this->getResultWS() !== null && $this->getResultDB() === null ) {
+				return round($this->getResultWS()['current']['wind_mph'],0);
+			} elseif( $this->getResultWS() === null && $this->getResultDB() !== null ) {
+				return round($this->getResultDB()['wind_speed_mph'],0);
+			}
 		}
 	}
 
     public function getWindDegree() {
-		if( $this->getResultWS() !== null && $this->getResultDB() === null ) {
-			return round($this->getResultWS()['current']['wind_degree'],0);
-		} elseif( $this->getResultWS() === null && $this->getResultDB() !== null ) {
-			return round($this->getResultDB()['wind_degree'],0);
+		if( $this->getCurlError() ) {
+			return '---';
+		} else {
+			if( $this->getResultWS() !== null && $this->getResultDB() === null ) {
+				return round($this->getResultWS()['current']['wind_degree'],0);
+			} elseif( $this->getResultWS() === null && $this->getResultDB() !== null ) {
+				return round($this->getResultDB()['wind_degree'],0);
+			}
 		}
 	}
 
     public function getPressureHpa() {
-		if( $this->getResultWS() !== null && $this->getResultDB() === null ) {
-			return round($this->getResultWS()['current']['pressure_mb'],0);
-		} elseif( $this->getResultWS() === null && $this->getResultDB() !== null ) {
-			return round($this->getResultDB()['pressure_hpa'],0);
+		if( $this->getCurlError() ) {
+			return '---';
+		} else {
+			if( $this->getResultWS() !== null && $this->getResultDB() === null ) {
+				return round($this->getResultWS()['current']['pressure_mb'],0);
+			} elseif( $this->getResultWS() === null && $this->getResultDB() !== null ) {
+				return round($this->getResultDB()['pressure_hpa'],0);
+			}
 		}
 	}
 
     public function getHumidity() {
-		if( $this->getResultWS() !== null && $this->getResultDB() === null ) {
-			return $this->getResultWS()['current']['humidity'];
-		} elseif( $this->getResultWS() === null && $this->getResultDB() !== null ) {
-			return $this->getResultDB()['humidity'];
+		if( $this->getCurlError() ) {
+			return '---';
+		} else {
+			if( $this->getResultWS() !== null && $this->getResultDB() === null ) {
+				return $this->getResultWS()['current']['humidity'];
+			} elseif( $this->getResultWS() === null && $this->getResultDB() !== null ) {
+				return $this->getResultDB()['humidity'];
+			}
 		}
 	}
 	/**

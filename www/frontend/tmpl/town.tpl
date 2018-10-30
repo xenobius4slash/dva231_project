@@ -1,5 +1,10 @@
 <div class="background"></div>
-<p><h1><?=$town?></h1></p>
+	<p><h1><?=$town?></h1>
+		<form method="POST" action="index.php?page=town">
+			<input type="hidden" name="town" value="<?=$town?>" />
+			<input type="submit" name="town_search" value="refresh" />
+		</form>
+	</p>
 
 <div id="weatherBox" style="float: left; margin-right: 5%; width:1014px; height:220px; margin-bottom:5%">
 	

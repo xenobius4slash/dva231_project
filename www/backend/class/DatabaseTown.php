@@ -138,6 +138,15 @@ class DatabaseTown extends Database {
 		}
 	}
 
+	/** delete one town by id
+	*	@param		$id			Integer
+	*	@return		Bool
+	*/
+	public function deleteTownById($id) {
+		$query = sprintf("DELETE FROM town WHERE id = %u", $this->escapeString($id) );
+		return $this->getDb()->query($query);
+	}
+
 	/** delete all towns
 	*	@return		Bool
 	*/
