@@ -25,14 +25,14 @@ class DatabaseUserSettings extends Database {
 	*/
 	
 	public function setUserSettings($userId, $settings) {
-		$sqlQuery = sprintf("UPDATE user SET settings = (settings) WHERE id = (userId)", 
-						$this->escapeString($userId), $this->escapeString($settings));
+		$sqlQuery = sprintf("UPDATE user SET settings = '%s' WHERE id = %u", $this->escapeString($settings), $this->escapeString($userId)); 
 		if( $this->getDb()->query($sqlQuery) ) {
 			return true;
 		} else {
 			return false;
 		}
 	}
+	
 
 
 }
