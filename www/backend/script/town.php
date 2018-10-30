@@ -6,6 +6,7 @@ require_once CLASS_PATH.'DatabaseTown.php';
 require_once CLASS_PATH.'WeatherServiceApixu.php';
 require_once CLASS_PATH.'WeatherServiceOpenWeatherMap.php';
 require_once CLASS_PATH.'WeatherServiceYahoo.php';
+require_once CLASS_PATH.'DatabaseUserTown.php';
 require_once CLASS_PATH.'DatabaseWeatherDataCurrent.php';
 
 if( !isset($_POST['town_search']) || !isset($_POST['town']) || (strlen($_POST['town']) == 0) ) {
@@ -73,6 +74,20 @@ if( !isset($_POST['town_search']) || !isset($_POST['town']) || (strlen($_POST['t
 		*/
 		$DBT->deleteTownById($townId);
 	} else {
+		/*
+		*	if user is logged in insert town in table "user_town", if not exist
+		*/
+		if($isLogin) {
+			$DBUT = new DatabaseUserTown();
+			if( !$DBUT->existByUserIdAndTownId($userId, $townId) ) {
+				if( !$DBUT->insertNewRow($userId, $townId) ) {
+					echo '<div class="alert alert-danger">ERROR while inserting the new town for the user in the database</div>';
+				} else {
+					echo '<div class="alert alert-info">added new town</div>';
+				}
+			}
+		}
+
 		/*
 		*	if town NOT up-to-date then insert new data into the database
 		*/

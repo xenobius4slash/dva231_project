@@ -6,6 +6,7 @@ define('CSS_PATH', 'frontend/css/');
 define('JS_PATH', 'frontend/js/');
 define('SCRIPT_PATH', 'backend/script/');
 define('CLASS_PATH', 'backend/class/');
+define('INDEX_PATH', '');
 
 require_once CLASS_PATH.'Session.php';
 
@@ -36,16 +37,15 @@ $phpfile = false;
 if( isset($_GET['page']) ) {
 	$p = htmlspecialchars($_GET['page']);
 	switch($p) {
-		case 'home' : $page = 'home';  break;
+		case 'home' : if($isLogin) { $page = 'member'; $phpfile = true; } else { $page = 'home'; } break;
 		case 'town' : $page = 'town'; $phpfile = true; break;
 		case 'test' : $page = 'test'; $phpfile = true; break;
 		case 'user' : $page = 'user'; $phpfile = true; break;
 		case 'admin' : if($admin) { $page = 'admin'; $phpfile = true; } else { $page = 'home'; } break;
-//		case 'imprint': $page = 'imprint'; break;
-		default : $page = 'home';
+		default : if($isLogin) { $page = 'member'; $phpfile = true; } else { $page = 'home'; }
 	}
 } else {
-	$page = 'home';
+	if($isLogin) { $page = 'member'; $phpfile = true; } else { $page = 'home'; }
 }
 
 ##############
