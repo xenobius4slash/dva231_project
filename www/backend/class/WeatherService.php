@@ -58,6 +58,10 @@ class WeatherService {
 	private $mode = 'current';	// default: current ['current', 'forecast']
 	private $unit = 'celsius';	// default: celsius ['celsius', 'fahrenheit']
 
+	function __construct() {
+		$this->setTempCelsius();
+	}
+
 	/**	convert a JSON to a associated HP-Array
 	*	@param		$json		JSON-Object
 	*	@returm		Array
@@ -98,6 +102,17 @@ class WeatherService {
 	**/
 	public function getTempUnit() {
 		return $this->unit;
+	}
+
+	/** get the sign for the temperature unit
+	*	@return		Character
+	*/
+	public function getTempUnitSign() {
+		if( $this->getTempUnit() == 'celsius' ) {
+			return 'C';
+		} else {
+			return 'F';
+		}
 	}
 
 	/** convert a value from "metre per second" (mps) to "miles per hour" (mph)
