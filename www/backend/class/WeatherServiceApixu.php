@@ -188,9 +188,9 @@ class WeatherServiceApixu extends WeatherService implements WeatherServiceInterf
 			if( $this->getResultWS() !== null && $this->getResultDB() === null ) {
 				$result = $this->getResultWS()['current']['last_updated_epoch'];
 				if($db) {
-					return date('Y-m-d H:i:s', strtotime($result));
+					return date('Y-m-d H:i:s', $result);
 				} else {
-					return date('j M Y, H:i', strtotime($result));
+					return date('j M Y, H:i', $result);
 				}
 			} elseif( $this->getResultWS() === null && $this->getResultDB() !== null ) {
 				return date('j M Y, H:i', strtotime($this->getResultDB()['build_date']));
