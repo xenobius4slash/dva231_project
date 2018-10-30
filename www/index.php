@@ -79,12 +79,12 @@ if( isset($_GET['page']) ) {
 						<li><a href="#">Contact</a></li>
 						<?php
 							if ($page != 'home') {
-								echo '<form class="navbar-form navbar-left" role="search">';
+								echo '<form class="navbar-form navbar-left" role="search" method="POST" action="index.php?page=town">';
 								echo '<div class="form-group">';
-								echo '<input type="text" class="form-control" placeholder="Search">';
+								echo '<input type="text" class="form-control" placeholder="Search" name="town">';
 								echo '</div>';
 								echo '&nbsp;';
-								echo '<button type="submit" class="btn btn-default">Submit</button>';
+								echo '<button type="submit" class="btn btn-default" name="town_search">Submit</button>';
 								echo '</form>';
 							}
 						?>

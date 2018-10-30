@@ -12,12 +12,12 @@ require_once CLASS_PATH.'DatabaseWeatherDataCurrent.php';
 #$town = 'Paris';
 #$town = 'Berlin';
 #$town = 'London';
-$town = htmlspecialchars($_GET['town']);
-$isTown = null;
-if( !isset($_GET['town']) || strlen($town) == 0 ) {
-	$isTown = false;
+
+
+if( !isset($_POST['town_search']) || !isset($_POST['town']) || (strlen($_POST['town']) == 0) ) {
+	header('Location: '.INDEX_PATH.'index.php');
 } else {
-	$isTown = true;
+	$town = htmlspecialchars($_POST['town']);
 	/*
 	*	exist town in the database?
 	*/
@@ -45,13 +45,13 @@ if( !isset($_GET['town']) || strlen($town) == 0 ) {
 	*/
 	$townUptodate = null;
 	if( $DBT->isTownUptodateByDbResult($resultTown) ) {
-		echo "town is up-to-date => receive data from database<br/>";
+//		echo "town is up-to-date => receive data from database<br/>";
 		$townUptodate = true;
 		$WSA->loadResultByTownIdDb($townId);
 		$WSOWM->loadResultByTownIdDb($townId);
 		$WSY->loadResultByTownIdDb($townId);
 	} else {
-		echo "town is NOT up-to-date => receive data from API call<br/>";
+//		echo "town is NOT up-to-date => receive data from API call<br/>";
 		$townUptodate = false;
 		if( !$WSA->loadResultByTownApi($town) ) {
 			if( $WSA->getCurlError() ) {
@@ -83,6 +83,5 @@ if( !isset($_GET['town']) || strlen($town) == 0 ) {
 		} 
 		else { echo "<p>ERROR while inserting the new values</p>"; }
 	}
-
 }
 ?>
