@@ -19,8 +19,6 @@
 </div>
 -->
 
-<div class="error-message">This is an error message</div>
-
 <div class="background"></div>
 <p><h1><?=$town?></h1></p>
 

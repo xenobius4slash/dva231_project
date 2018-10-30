@@ -45,27 +45,27 @@ if( !isset($_POST['town_search']) || !isset($_POST['town']) || (strlen($_POST['t
 	*/
 	$townUptodate = null;
 	if( $DBT->isTownUptodateByDbResult($resultTown) ) {
-//		echo "town is up-to-date => receive data from database<br/>";
+		echo '<div class="alert alert-info">received values are from the database</div>';
 		$townUptodate = true;
 		$WSA->loadResultByTownIdDb($townId);
 		$WSOWM->loadResultByTownIdDb($townId);
 		$WSY->loadResultByTownIdDb($townId);
 	} else {
-//		echo "town is NOT up-to-date => receive data from API call<br/>";
+		echo '<div class="alert alert-info">received values are from the API-Call</div>';
 		$townUptodate = false;
 		if( !$WSA->loadResultByTownApi($town) ) {
 			if( $WSA->getCurlError() ) {
-				echo "<p>cURL Error (apixu): ".$WSA->getCurlErrorCode()." => ".$WSA->getCurlErrorMessage()."</p>";
+				echo '<div class="alert alert-danger">cURL Error (apixu): '.$WSA->getCurlErrorCode().' => '.$WSA->getCurlErrorMessage().'</div>';
 			}
 		}
 		if( !$WSOWM->loadResultByTownApi($town) ) {
 			if( $WSOWM->getCurlError() ) {
-				echo "<p>cURL Error (open weather map): ".$WSOWM->getCurlErrorCode()." => ".$WSOWM->getCurlErrorMessage()."</p>";
+				echo '<div class="alert alert-danger">cURL Error (open weather map): '.$WSOWM->getCurlErrorCode().' => '.$WSOWM->getCurlErrorMessage().'</div>';
 			}
 		}
 		if( !$WSY->loadResultByTownApi($town) ) {
 			if( $WSA->getCurlError() ) {
-				echo "<p>cURL Error (yahoo): ".$WSY->getCurlErrorCode()." => ".$WSY->getCurlErrorMessage()."</p>";
+				echo '<div class="alert alert-danger">cURL Error (yahoo): '.$WSY->getCurlErrorCode().' => '.$WSY->getCurlErrorMessage().'</div>';
 			}
 		}
 	}
@@ -81,7 +81,7 @@ if( !isset($_POST['town_search']) || !isset($_POST['town']) || (strlen($_POST['t
 			// set town to up-to-date
 			$DBT->setTownToUptodateById($townId);
 		} 
-		else { echo "<p>ERROR while inserting the new values</p>"; }
+		else { echo '<div class="alert alert-danger">ERROR while inserting the new values in the database</div>'; }
 	}
 }
 ?>
