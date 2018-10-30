@@ -246,5 +246,15 @@ class User {
 		}
 	}
 	
+	public function changeUsername($userId, $newUsername)
+	{
+		$DBU = new DatabaseUser();
+		if( $DBU->changeUsername($userId, $newUsername) ) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
 }
 ?>

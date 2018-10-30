@@ -142,5 +142,14 @@ class DatabaseUser extends Database {
 			return false;
 		}
 	}
+	
+	public function changeUsername($userId, $newUsername) {
+		$sqlQuery = sprintf("UPDATE user SET name = '%s' WHERE id = %u", $this->escapeString($newUsername), $this->escapeString($userId)); 
+		if( $this->getDb()->query($sqlQuery) ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
 ?>
