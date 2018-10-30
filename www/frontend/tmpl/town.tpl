@@ -244,6 +244,7 @@
 	['light rain', 						'rain'],
 	['moderate rain', 					'rain'],
 	['ragged shower rain', 				'rain'],
+	['rain', 				'rain'],
 	['scattered showers', 				'rain'],
 	['shower drizzle', 					'rain'],
 	['shower rain', 					'rain'],
