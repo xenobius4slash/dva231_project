@@ -241,7 +241,7 @@ class User {
 	public function setDefaultSettings($userId)
 	{
 		$U = new User();
-		if( $U->setUserSettings($userId, getDefaultSettings() ) ) {
+		if( $U->setUserSettings($userId, $U->getDefaultSettings() ) ) {
 			return true;
 		}else {
 			return false;

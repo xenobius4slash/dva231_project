@@ -111,5 +111,36 @@ class DatabaseUser extends Database {
 			return false;
 		}
 	}
+	
+	
+	/**	get user settings by userId
+	*	@param		$UserId			String
+	*	@return		JSONObject
+	*/
+	
+	public function getUserSettings($userId) {
+		$sqlQuery = sprintf("SELECT ".$this->getColumns()." FROM user WHERE LOWER(userId) = LOWER('%s')", $this->escapeString($userId) );
+		$result = $this->getDb()->query($sqlQuery);
+		if($result->num_rows > 0) {
+			return $result;
+		} else {
+			return null;
+		}
+	}
+	
+	/**	set user settings for userId
+	*	@param		$UserId			String
+	*	@param		$settings		JSONObject
+	*	@return		bool
+	*/
+	
+	public function setUserSettings($userId, $settings) {
+		$sqlQuery = sprintf("UPDATE user SET settings = '%s' WHERE id = %u", $this->escapeString($settings), $this->escapeString($userId)); 
+		if( $this->getDb()->query($sqlQuery) ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
 ?>
