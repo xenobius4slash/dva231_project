@@ -110,5 +110,18 @@ class DatabaseWeatherDataCurrent extends Database {
 			return false;
 		}
 	}
+
+	/** delete all weather datas
+	*	@return		Bool
+	*/
+	public function deleteAllWeatherDatas() {
+		$query = sprintf("DELETE FROM weather_data_current");
+		$result = $this->getDb()->query($query);
+		if($result === true) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
 ?>
