@@ -1,8 +1,14 @@
 <?php
-require_once CLASS_PATH.'Session.php';
-require_once CLASS_PATH.'User.php';
+//include_once 'defines.php';
+//require_once CLASS_PATH.'Session.php';
+//require_once CLASS_PATH.'User.php';
 
 if( isset($_POST['settings_saved']) ) {
+	
+	include_once 'defines.php';
+	require_once CLASS_PATH.'Session.php';
+	require_once CLASS_PATH.'User.php';
+
 	$return = array('error' => null, 'code' => null, 'msg' => null);
 	//$backgroundColor = $_POST['username'];
 	$username = $_POST['username'];
