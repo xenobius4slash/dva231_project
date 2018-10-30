@@ -23,7 +23,7 @@ document.getElementById("printAvgPre").innerHTML = ((<?=$WSA->getPressureHpa()?>
 <p><b>Apixu</b></p>
 <table width="250px">
 	<tr>				<td colspan="2">					<?=($WSA->getCurlError())?('cURL Error: '.$WSA->getCurlErrorCode().' => '.$WSA->getCurlErrorMessage()):('')?></td></tr>
-	<tr>				<td colspan="2">					<h1><?=$WSA->getTemperature()?>°<h1>								</td>													</tr>
+	<tr>				<td colspan="2">					<h1><?=$WSA->getTemperature()?>° <?=$WSA->getTempUnitSign()?><h1>								</td>													</tr>
 	<tr>				<td style="text-align: center;">	<img src="frontend/img/error.png" height="38" id="weatherImage1"/></td><td ><p1 id="weatherText1"><?=$WSA->getSky()?></p1></td></tr>
 	<tr height="50px">	<td style="text-align: center;">	<img src="frontend/img/wind_speed.png" alt="Wind Speed" height="38"></td>	<td id="wind1" style="font-size:20px; color:#333333;"><?=$WSA->getWindSpeed()?> m/s<br></td>	</tr>
 	<tr height="50px">	<td style="text-align: center;">	<img src="frontend/img/humidity.png" alt="Wind Speed" height="38">	</td>	<td ><p1><?=$WSA->getHumidity()?> %</p1></td>	</tr>		
@@ -36,7 +36,7 @@ document.getElementById("printAvgPre").innerHTML = ((<?=$WSA->getPressureHpa()?>
 <p><b>OpenWeatherMap</b></p>
 <table width="250px">
 	<tr>				<td colspan="2">					<?=($WSOWM->getCurlError())?('cURL Error: '.$WSOWM->getCurlErrorCode().' => '.$WSOWM->getCurlErrorMessage()):('')?></td></tr>
-	<tr>				<td colspan="2">					<h1><?=$WSOWM->getTemperature()?>°<h1>								</td>													</tr>
+	<tr>				<td colspan="2">					<h1><?=$WSOWM->getTemperature()?>° <?=$WSOWM->getTempUnitSign()?><h1>								</td>													</tr>
 	<tr>				<td style="text-align: center;">	<img src="frontend/img/error.png" height="38" id="weatherImage2"/></td><td ><p1 id="weatherText2"><?=$WSOWM->getSky()?></p1></td></tr>
 	<tr height="50px">	<td style="text-align: center;">	<img src="frontend/img/wind_speed.png" alt="Wind Speed" height="38"></td>	<td id="wind2" style="font-size:20px; color:#333333;"><?=$WSOWM->getWindSpeed()?> m/s<br></td>	</tr>
 	<tr height="50px">	<td style="text-align: center;">	<img src="frontend/img/humidity.png" alt="Wind Speed" height="38">	</td>	<td><p1><?=$WSOWM->getHumidity()?> %</p1></td>	</tr>
@@ -49,7 +49,7 @@ document.getElementById("printAvgPre").innerHTML = ((<?=$WSA->getPressureHpa()?>
 <p><b>Yahoo</b></p>
 <table width="250px">
 	<tr>				<td colspan="2">					<?=($WSY->getCurlError())?('cURL Error: '.$WSY->getCurlErrorCode().' => '.$WSY->getCurlErrorMessage()):('')?></td></tr>
-	<tr>				<td colspan="2">					<h1><?=$WSY->getTemperature()?>°<h1>
+	<tr>				<td colspan="2">					<h1><?=$WSY->getTemperature()?>° <?=$WSY->getTempUnitSign()?><h1>
 	<tr>				<td style="text-align: center;">	<img src="frontend/img/error.png" height="38" id="weatherImage3"/></td><td ><p1 id="weatherText3"><?=$WSY->getSky()?></p1></td></tr>		</td>													</tr>
 	<tr height="50px">	<td style="text-align: center;">	<img src="frontend/img/wind_speed.png" alt="Wind Speed" height="38"></td>	<td id="wind3" style="font-size:20px; color:#333333;"><?=$WSY->getWindSpeed()?> m/s<br></td>	</tr>
 	<tr height="50px">	<td style="text-align: center;">	<img src="frontend/img/humidity.png" alt="Wind Speed" height="38">	</td>	<td><p1><?=$WSY->getHumidity()?> %</p1></td>	</tr>
