@@ -1,5 +1,4 @@
 <?php
-include_once 'defines.php';
 require_once CLASS_PATH.'Session.php';
 require_once CLASS_PATH.'User.php';
 
