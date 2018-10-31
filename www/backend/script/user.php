@@ -3,6 +3,16 @@
 //require_once CLASS_PATH.'Session.php';
 //require_once CLASS_PATH.'User.php';
 
+/*$settings = $_SESSION['settings'];
+$json = json_decode($settings, true);
+//echo $settings;
+if($json['unit']=="celsius"){
+	?><script>
+	radio = document.getElementById("celsius").innerHTML = "";
+	radio.checked = true;
+	</script><?php
+}*/
+//echo "{$_SESSION['settings']}";
 if( isset($_POST['settings_saved']) ) {
 	
 	include_once 'defines.php';
@@ -46,6 +56,13 @@ if( isset($_POST['settings_saved']) ) {
 					$return['code'] = 3;
 					$return['msg'] = 'Unable to save settings';
 				
+				} else{
+					if(!$S->setSessionSettings())
+					{
+						$return['error'] = true;
+						$return['code'] = 4;
+						$return['msg'] = 'Unable to save settings to session';	
+					}
 				}
 			}
 		}
@@ -56,19 +73,19 @@ if( isset($_POST['settings_saved']) ) {
 		if($U->existUserByUsername($username))
 		{
 		$return['error'] = true;
-		$return['code'] = 4;
+		$return['code'] = 5;
 		$return['msg'] = 'Username already exist';
 		} else{
 			if(!$U->isValidUsername($username))
 			{
 			$return['error'] = true;
-			$return['code'] = 5;
+			$return['code'] = 6;
 			$return['msg'] = 'Invalid Username';
 			} else{
 				if(!$U->changeUsername($S->getSessionUserId(), $username))
 				{
 					$return['error'] = true;
-					$return['code'] = 6;
+					$return['code'] = 7;
 					$return['msg'] = 'Unable to change Username';
 				}else{
 					$return['error'] = false;
@@ -79,12 +96,12 @@ if( isset($_POST['settings_saved']) ) {
 		$return['error'] = false;
 	}
 	
+	header('Location: '.INDEX_PATH.'index.php');
 	
-	
-	if($return['error'] === false) {
+	if(!$return['error'] === false) {
 		header('Location: '.INDEX_PATH.'index.php');
+		exit();
 	} else {
-	
 		header('Location: '.INDEX_PATH.'user.php?settings_fail=1&error_code='.$return['code'].'&msg='.$return['msg']);
 	}
 }

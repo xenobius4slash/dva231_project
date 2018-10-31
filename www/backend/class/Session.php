@@ -101,6 +101,13 @@ class Session {
 			return false;
 		}
 	}
+	
+	
+	public function setSessionSettings(){
+		$U = new User();
+		$_SESSION['settings'] = $U->getUserSettings($this->getSessionUserId());
+		return;
+	}
 
 }
 ?>

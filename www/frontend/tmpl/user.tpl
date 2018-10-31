@@ -8,8 +8,8 @@
 			</div>
 			<br>
 			<div id="input-group" style="text-align:left; padding-left:10px; width: 12%;">
-				<input type="radio" name="degreeType" value="celsius"><b> Celsius</b><br>
-				<input type="radio" name="degreeType" value="fahrenheit"><b> Fahrenheit</b><br>
+				<input type="radio" name="degreeType" value="celsius" id="celsius" checked><b> Celsius</b><br>
+				<input type="radio" name="degreeType" value="fahrenheit id ="fahrenheit" ><b> Fahrenheit</b><br>
 			</div>
 			<br>
 			<button name="settings_saved" id="btn-apply" style="padding: 6px 20px;border: none;border-radius: 5px;background-color: rgb(212, 10, 20);color: #fff;">Apply changes</button>
