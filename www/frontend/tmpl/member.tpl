@@ -14,8 +14,8 @@
 	</form>
 	<br/><br/>
 	<form method="post" action="index.php?page=town">
-		<?php for($i=0; $i<count($data['towns']); $i++) { ?>
-			<input type="submit" class="btn btn-lg" name="town" value="<?=$data['towns'][$i]?>" />
+		<?php for($i=0; $i<count($data); $i++) { ?>
+			<input type="submit" class="btn btn-lg" name="town" value="<?=$data[$i]?>" />
 		<?php } ?>
 		<input type="hidden" name="town_search" />
 	</form>
