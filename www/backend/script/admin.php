@@ -1,4 +1,7 @@
 <?php
-require_once CLASS_PATH.'User.php';
+require_once CLASS_PATH.'Admin.php';
+
+$ADMIN = new Admin();
+$users = $ADMIN->getAllNotAdminUser();
 
 ?>

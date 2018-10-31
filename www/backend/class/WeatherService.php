@@ -1,4 +1,5 @@
 <?php
+require_once 'User.php';
 require_once 'DatabaseWeatherDataCurrent.php';
 
 interface WeatherServiceInterface {
@@ -58,14 +59,6 @@ class WeatherService {
 	// user settings
 	private $mode = 'current';	// default: current ['current', 'forecast']
 	private $unit = 'celsius';	// default: celsius ['celsius', 'fahrenheit']
-
-	/** set the current temperature unit
-	*	logged in user: look for the settings
-	*	guest: only celsius
-	*/
-	function __construct() {
-		$this->setTempCelsius();
-	}
 
 	/**	convert a JSON to a associated HP-Array
 	*	@param		$json		JSON-Object

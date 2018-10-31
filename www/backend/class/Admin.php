@@ -8,7 +8,9 @@ require_once 'DatabaseWeatherDataCurrent.php';
 class Admin {
 
 	public function getAllNotAdminUser() {
-		
+		$DBU = new DatabaseUser();
+		$DBU->setDbColumns('id,email,name');
+		return $DBU->getAllNotAdminUser();
 	}
 
 	/** removes a registered user

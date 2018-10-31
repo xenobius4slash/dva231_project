@@ -164,7 +164,33 @@ class DatabaseUser extends Database {
 		} else {
 			return false;
 		}
+	}
 
+	/** get all non-Admin user
+	*	@return		Bool
+	*/
+	public function getAllNotAdminUser() {
+		$sqlQuery = sprintf("SELECT ".$this->getColumns()." FROM user WHERE level != 1");
+		$result = $this->getDb()->query($sqlQuery);
+		if($result->num_rows > 0) {
+			return $this->getArrayFromSqlResult($result);
+		} else {
+			return false;
+		}
+	}
+
+	/** delete one user
+	*	@param		$userId			Integer
+	*	@return		Bool
+	*/
+	public function deleteUserByUserId($userId) {
+		$sqlQuery = sprintf("DELETE FROM user WHERE id = %u", $this->escapeString($userId) );
+		$result = $this->getDb()->query($sqlQuery);
+		if($result === true) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 }
 ?>
