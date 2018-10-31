@@ -91,7 +91,7 @@ if( isset($_GET['page']) ) {
 						<li><a href="#">About</a></li>
 						<li><a href="#">Contact</a></li>
 						<?php
-							if ($page != 'home') {
+							if ($page != 'home' && $page != 'member') {
 								echo '<form class="navbar-form navbar-left" role="search" method="POST" action="index.php?page=town">';
 								echo '<div class="form-group">';
 								echo '<input type="text" class="form-control" placeholder="Search" name="town">';
