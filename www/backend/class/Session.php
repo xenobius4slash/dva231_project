@@ -106,7 +106,7 @@ class Session {
 	public function setSessionSettings(){
 		$U = new User();
 		$_SESSION['settings'] = $U->getUserSettings($this->getSessionUserId());
-		return;
+		return true;
 	}
 
 }
