@@ -1,66 +1,237 @@
+<!-- PAGE BACKGROUND -->
 <div class="background"></div>
-	<p><h1><?=$town?></h1>
-		<form method="POST" action="index.php?page=town">
-			<input type="hidden" name="town" value="<?=$town?>" />
-			<input type="submit" name="town_search" value="refresh" />
-		</form>
-	</p>
 
-<div id="weatherBox" style="float: left; margin-right: 5%; width:1014px; height:220px; margin-bottom:5%">
-	
+<!-- NAME OF THE CITY AND REFRESH BUTTON -->
+<p>
+	<h1>
+		<?=$town?>
+	</h1>
+	<form method="POST" action="index.php?page=town">
+		<input type="hidden" name="town" value="<?=$town?>" />
+		<input class="btn btn-success" type="submit" name="town_search" value="Refresh" />
+	</form>
+</p>
+
+<!-- AVERAGE WEATHER BOX -->
+<div id="weatherBox" style="float: left; width:100%; height:220px; margin-bottom:5%">
 	<table style="text-align:center; margin-top:40px;">
-	<tr><td rowspan="2" height="120px" width="300px"><h1 id="printAvgTemp" style="font-size:100px;"></h1></td><td width="200px"><img src="frontend/img/wind_speed.png" alt="Wind Speed" width="100"></td><td width="200px"><img src="frontend/img/humidity.png" alt="Humidity" width="100"></td><td width="200px"><img src="frontend/img/pressure.png" alt="Pressure" width="100"></td></td></tr>
-	<tr style="font-size:20px;"><td id="printAvgWind" style="color:#333;">Wind</td><td id="printAvgHum" style="color:#333;">Hum</td><td id="printAvgPre" style="color:#333;">Pre</td></tr>
+		<tr>
+			<td rowspan="2" height="120px" width="300px">
+				<h1 id="printAvgTemp" style="font-size:100px;">
+				</h1>
+			</td>
+			<td width="200px">
+				<img src="frontend/img/wind_speed.png" alt="Wind Speed" width="100">
+			</td>
+			<td width="200px">
+				<img src="frontend/img/humidity.png" alt="Humidity" width="100">
+			</td>
+			<td width="200px">
+				<img src="frontend/img/pressure.png" alt="Pressure" width="100">
+			</td>
+		</tr>
+		<tr style="font-size:20px;">
+			<td id="printAvgWind" style="color:#333;">
+				Wind
+			</td>
+			<td id="printAvgHum" style="color:#333;">
+				Hum
+			</td>
+			<td id="printAvgPre" style="color:#333;">
+				Pre
+			</td>
+		</tr>
 	</table>
 </div>
 
+<!-- CALCULATES THE AVERAGE VALUES-->
 <script type="text/javascript" language="javascript">
-/*
-Calculates the average values.
-*/
-document.getElementById("printAvgTemp").innerHTML = ((<?=$WSA->getTemperature()?> + <?=$WSOWM->getTemperature()?> + <?=$WSY->getTemperature()?>)/3).toFixed(0) + "°";
-document.getElementById("printAvgWind").innerHTML = ((<?=$WSA->getWindSpeed()?> + <?=$WSOWM->getWindSpeed()?> + <?=$WSY->getWindSpeed()?>)/3).toFixed(1) + " m/s";
-document.getElementById("printAvgHum").innerHTML = ((<?=$WSA->getHumidity()?> + <?=$WSOWM->getHumidity()?> + <?=$WSY->getHumidity()?>)/3).toFixed(0) + " %";
-document.getElementById("printAvgPre").innerHTML = ((<?=$WSA->getPressureHpa()?>+<?=$WSOWM->getPressureHpa()?>+<?=$WSY->getPressureHpa()?>)/3).toFixed(0) + " hPa";
+	document.getElementById("printAvgTemp").innerHTML = ((<?=$WSA->getTemperature()?> + <?=$WSOWM->getTemperature()?> + <?=$WSY->getTemperature()?>)/3).toFixed(0) + "°";
+	document.getElementById("printAvgWind").innerHTML = ((<?=$WSA->getWindSpeed()?> + <?=$WSOWM->getWindSpeed()?> + <?=$WSY->getWindSpeed()?>)/3).toFixed(1) + " m/s";
+	document.getElementById("printAvgHum").innerHTML = ((<?=$WSA->getHumidity()?> + <?=$WSOWM->getHumidity()?> + <?=$WSY->getHumidity()?>)/3).toFixed(0) + " %";
+	document.getElementById("printAvgPre").innerHTML = ((<?=$WSA->getPressureHpa()?>+<?=$WSOWM->getPressureHpa()?>+<?=$WSY->getPressureHpa()?>)/3).toFixed(0) + " hPa";
 </script>
 
+<!-- FIRST WEATHER BOX -->
 <div id="weatherBox" style="float: left; margin-right: 5%;">
-<p><b>Apixu</b></p>
-<table width="250px">
-	<tr>				<td colspan="2">					<?=($WSA->getCurlError())?('cURL Error: '.$WSA->getCurlErrorCode().' => '.$WSA->getCurlErrorMessage()):('')?></td></tr>
-	<tr>				<td colspan="2">					<h1><?=$WSA->getTemperature()?>° <?=$WSA->getTempUnitSign()?><h1>								</td>													</tr>
-	<tr>				<td style="text-align: center;">	<img src="frontend/img/error.png" height="38" id="weatherImage1"/></td><td ><p1 id="weatherText1"><?=$WSA->getSky()?></p1></td></tr>
-	<tr height="50px">	<td style="text-align: center;">	<img src="frontend/img/wind_speed.png" alt="Wind Speed" height="38"></td>	<td id="wind1" style="font-size:20px; color:#333333;"><?=$WSA->getWindSpeed()?> m/s<br></td>	</tr>
-	<tr height="50px">	<td style="text-align: center;">	<img src="frontend/img/humidity.png" alt="Wind Speed" height="38">	</td>	<td ><p1><?=$WSA->getHumidity()?> %</p1></td>	</tr>		
-	<tr>				<td style="text-align: center;">	<img src="frontend/img/pressure.png" alt="Pressure" height="30"></td><td style="font-size:20px; color:#333333;"><?=$WSA->getPressureHpa()?> hPa</td></tr>
-	<tr>				<td colspan="2" style="text-align: center; font-size:20px; color:#333333;"><br><br>Last updated:<br><?=$WSA->getLastUpdate()?></td></tr>
-</table>
+	<p><strong>Apixu</strong></p>
+	<table width="250px">
+		<tr>
+			<td colspan="2">
+				<?=($WSA->getCurlError())?('cURL Error: '.$WSA->getCurlErrorCode().' => '.$WSA->getCurlErrorMessage()):('')?>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<h1>
+					<?=$WSA->getTemperature()?>° <?=$WSA->getTempUnitSign()?>
+				<h1>
+			</td>													</tr>
+		<tr>
+			<td style="text-align: center;">
+			<img src="frontend/img/error.png" height="38" id="weatherImage1"/>
+			</td>
+			<td>
+				<p1 id="weatherText1">
+					<?=$WSA->getSky()?>
+				</p1>
+			</td>
+		</tr>
+		<tr height="50px">
+			<td style="text-align: center;">
+				<img src="frontend/img/wind_speed.png" alt="Wind Speed" height="38">
+			</td>
+			<td id="wind1" style="font-size:20px; color:#333333;">
+				<?=$WSA->getWindSpeed()?> m/s<br>
+			</td>
+		</tr>
+		<tr height="50px">
+			<td style="text-align: center;">
+				<img src="frontend/img/humidity.png" alt="Wind Speed" height="38">
+			</td>
+			<td>
+				<p1>
+					<?=$WSA->getHumidity()?> %
+				</p1>
+			</td>
+		</tr>		
+		<tr>
+			<td style="text-align: center;">
+				<img src="frontend/img/pressure.png" alt="Pressure" height="30">
+			</td>
+			<td style="font-size:20px; color:#333333;">
+				<?=$WSA->getPressureHpa()?> hPa
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2" style="text-align: center; font-size:20px; color:#333333;">
+			<br><br>
+				Last updated:<br>
+				<?=$WSA->getLastUpdate()?>
+			</td>
+		</tr>
+	</table>
 </div>
 
+<!-- SECOND WEATHER BOX -->
 <div id="weatherBox" style="float:left; margin-right: 5%;">
-<p><b>OpenWeatherMap</b></p>
-<table width="250px">
-	<tr>				<td colspan="2">					<?=($WSOWM->getCurlError())?('cURL Error: '.$WSOWM->getCurlErrorCode().' => '.$WSOWM->getCurlErrorMessage()):('')?></td></tr>
-	<tr>				<td colspan="2">					<h1><?=$WSOWM->getTemperature()?>° <?=$WSOWM->getTempUnitSign()?><h1>								</td>													</tr>
-	<tr>				<td style="text-align: center;">	<img src="frontend/img/error.png" height="38" id="weatherImage2"/></td><td ><p1 id="weatherText2"><?=$WSOWM->getSky()?></p1></td></tr>
-	<tr height="50px">	<td style="text-align: center;">	<img src="frontend/img/wind_speed.png" alt="Wind Speed" height="38"></td>	<td id="wind2" style="font-size:20px; color:#333333;"><?=$WSOWM->getWindSpeed()?> m/s<br></td>	</tr>
-	<tr height="50px">	<td style="text-align: center;">	<img src="frontend/img/humidity.png" alt="Wind Speed" height="38">	</td>	<td><p1><?=$WSOWM->getHumidity()?> %</p1></td>	</tr>
-	<tr>				<td style="text-align: center;">	<img src="frontend/img/pressure.png" alt="Pressure" height="30"></td><td style="font-size:20px; color:#333333;"><?=$WSOWM->getPressureHpa()?> hPa</td></tr>
-	<tr>				<td colspan="2" style="text-align: center; font-size:20px; color:#333333;"><br><br>Last updated:<br><?=$WSOWM->getLastUpdate()?></td></tr>
-</table>
+	<p><strong>OpenWeatherMap</strong></p>
+	<table width="250px">
+		<tr>
+			<td colspan="2">
+				<?=($WSOWM->getCurlError())?('cURL Error: '.$WSOWM->getCurlErrorCode().' => '.$WSOWM->getCurlErrorMessage()):('')?>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<h1>
+					<?=$WSOWM->getTemperature()?>° <?=$WSOWM->getTempUnitSign()?>
+				<h1>
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align: center;">
+				<img src="frontend/img/error.png" height="38" id="weatherImage2"/>
+			</td>
+			<td>
+				<p1 id="weatherText2">
+					<?=$WSOWM->getSky()?>
+				</p1>
+			</td>
+		</tr>
+		<tr height="50px">
+			<td style="text-align: center;">
+				<img src="frontend/img/wind_speed.png" alt="Wind Speed" height="38">
+			</td>
+			<td id="wind2" style="font-size:20px; color:#333333;">
+				<?=$WSOWM->getWindSpeed()?> m/s<br>
+			</td>
+		</tr>
+		<tr height="50px">
+			<td style="text-align: center;">
+				<img src="frontend/img/humidity.png" alt="Wind Speed" height="38">
+			</td>
+			<td>
+				<p1>
+					<?=$WSOWM->getHumidity()?> %
+				</p1>
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align: center;">
+				<img src="frontend/img/pressure.png" alt="Pressure" height="30">
+			</td>
+			<td style="font-size:20px; color:#333333;">
+				<?=$WSOWM->getPressureHpa()?> hPa
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2" style="text-align: center; font-size:20px; color:#333333;">
+				<br><br>Last updated:<br>
+				<?=$WSOWM->getLastUpdate()?>
+			</td>
+		</tr>
+	</table>
 </div>
 
+<!-- THIRD WEATHER BOX -->
 <div id="weatherBox">
-<p><b>Yahoo</b></p>
-<table width="250px">
-	<tr>				<td colspan="2">					<?=($WSY->getCurlError())?('cURL Error: '.$WSY->getCurlErrorCode().' => '.$WSY->getCurlErrorMessage()):('')?></td></tr>
-	<tr>				<td colspan="2">					<h1><?=$WSY->getTemperature()?>° <?=$WSY->getTempUnitSign()?><h1>
-	<tr>				<td style="text-align: center;">	<img src="frontend/img/error.png" height="38" id="weatherImage3"/></td><td ><p1 id="weatherText3"><?=$WSY->getSky()?></p1></td></tr>		</td>													</tr>
-	<tr height="50px">	<td style="text-align: center;">	<img src="frontend/img/wind_speed.png" alt="Wind Speed" height="38"></td>	<td id="wind3" style="font-size:20px; color:#333333;"><?=$WSY->getWindSpeed()?> m/s<br></td>	</tr>
-	<tr height="50px">	<td style="text-align: center;">	<img src="frontend/img/humidity.png" alt="Wind Speed" height="38">	</td>	<td><p1><?=$WSY->getHumidity()?> %</p1></td>	</tr>
-	<tr>				<td style="text-align: center;">	<img src="frontend/img/pressure.png" alt="Pressure" height="30"></td><td style="font-size:20px; color:#333333;"><?=$WSY->getPressureHpa()?> hPa</td></tr>
-	<tr>				<td colspan="2" style="text-align: center; font-size:20px; color:#333333;"><br><br>Last updated:<br><?=$WSY->getLastUpdate()?></td></tr>
-</table>
+	<p><strong>Yahoo</strong></p>
+	<table width="250px">
+		<tr>
+			<td colspan="2">
+				<?=($WSY->getCurlError())?('cURL Error: '.$WSY->getCurlErrorCode().' => '.$WSY->getCurlErrorMessage()):('')?>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<h1>
+					<?=$WSY->getTemperature()?>° <?=$WSY->getTempUnitSign()?>
+				<h1>
+		</tr>
+		<tr>
+			<td style="text-align: center;">
+				<img src="frontend/img/error.png" height="38" id="weatherImage3"/>
+			</td>
+			<td>
+				<p1 id="weatherText3">
+					<?=$WSY->getSky()?>
+				</p1>
+			</td>
+		</tr>		
+		<tr height="50px">
+			<td style="text-align: center;">
+				<img src="frontend/img/wind_speed.png" alt="Wind Speed" height="38">
+			</td>
+			<td id="wind3" style="font-size:20px; color:#333333;">
+				<?=$WSY->getWindSpeed()?> m/s<br>
+			</td>
+		</tr>
+		<tr height="50px">
+			<td style="text-align: center;">
+				<img src="frontend/img/humidity.png" alt="Wind Speed" height="38">
+			</td>
+			<td>
+				<p1>
+					<?=$WSY->getHumidity()?> %
+				</p1>
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align: center;">
+				<img src="frontend/img/pressure.png" alt="Pressure" height="30">
+			</td>
+			<td style="font-size:20px; color:#333333;">
+				<?=$WSY->getPressureHpa()?> hPa
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2" style="text-align: center; font-size:20px; color:#333333;">
+				<br><br>Last updated:<br>
+				<?=$WSY->getLastUpdate()?>
+			</td>
+		</tr>
+	</table>
 </div>
 
 <script type="text/javascript" language="javascript">
