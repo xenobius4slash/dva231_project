@@ -13,11 +13,12 @@ if($json['unit']=="celsius"){
 	</script><?php
 }*/
 //echo "{$_SESSION['settings']}";
+	//require_once CLASS_PATH.'Session.php';
+	//require_once CLASS_PATH.'User.php';
 if( isset($_POST['settings_saved']) ) {
 	
-	include_once 'defines.php';
-	require_once CLASS_PATH.'Session.php';
-	require_once CLASS_PATH.'User.php';
+	//include_once 'defines.php';
+	
 
 	$return = array('error' => null, 'code' => null, 'msg' => null);
 	//$backgroundColor = $_POST['username'];
@@ -57,12 +58,12 @@ if( isset($_POST['settings_saved']) ) {
 					$return['msg'] = 'Unable to save settings';
 				
 				} else{
-					if(!$S->setSessionSettings())
+					/*if(!$S->setSessionSettings())
 					{
 						$return['error'] = true;
 						$return['code'] = 4;
 						$return['msg'] = 'Unable to save settings to session';	
-					}
+					}*/
 				}
 			}
 		}
@@ -96,14 +97,13 @@ if( isset($_POST['settings_saved']) ) {
 		$return['error'] = false;
 	}
 	
-	header('Location: '.INDEX_PATH.'index.php');
 	
 	if(!$return['error'] === false) {
 		header('Location: '.INDEX_PATH.'index.php');
 		exit();
 	} else {
-		header('Location: '.INDEX_PATH.'user.php?settings_fail=1&error_code='.$return['code'].'&msg='.$return['msg']);
+		//header('Location: '.INDEX_PATH.'user.php?settings_fail=1&error_code='.$return['code'].'&msg='.$return['msg']);
 	}
-}
 
+}
 ?>

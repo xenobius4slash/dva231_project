@@ -68,7 +68,7 @@ if( isset($_POST['signup']) ) {
 	if($return['error'] === false) {
 		header('Location: '.INDEX_PATH.'index.php');
 	} else {
-		header('Location: '.INDEX_PATH.'register.php?register_fail=1&error_code='.$return['code'].'&msg='.$return['msg']);
+		header('Location: '.INDEX_PATH.'index.php?register_fail=1&error_code='.$return['code'].'&msg='.$return['msg']);
 	}
 }
 ?>

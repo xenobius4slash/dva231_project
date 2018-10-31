@@ -1,9 +1,10 @@
 <?php
+
+
+if( isset($_POST['login_submit']) ) {
 include_once 'defines.php';
 require_once CLASS_PATH.'Session.php';
 require_once CLASS_PATH.'User.php';
-
-if( isset($_POST['login_submit']) ) {
 	$return = array('error' => null, 'code' => null, 'msg' => null);
 	$email = htmlspecialchars($_POST['login_email']);
 	$password = htmlspecialchars($_POST['login_password']);
@@ -31,14 +32,20 @@ if( isset($_POST['login_submit']) ) {
 				$return['code'] = 3;
 				$return['msg'] = 'Error while set the user-id in session';
 			} else {
-				header('Location: index.php');
+				if(!$S->setSessionSettings()){
+					$return['error'] = true;
+					$return['code'] = 4;
+					$return['msg'] = 'Error while set the settings in session';
+				} else{
+					header('Location: index.php');
+				}
 			}
 		}
 	}
 	if($return['error'] === false) {
 		header('Location: '.INDEX_PATH.'index.php');
 	} else {
-		header('Location: '.INDEX_PATH.'login.php?login_fail=1&error_code='.$return['code'].'&msg='.$return['msg']);
+		header('Location: '.INDEX_PATH.'index.php?login_fail=1&error_code='.$return['code'].'&msg='.$return['msg']);
 	}
 }
 
