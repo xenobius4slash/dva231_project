@@ -13,21 +13,21 @@
 </p>
 
 <!-- AVERAGE WEATHER BOX -->
-<div id="weatherBox" style="float: left; width:100%; height:220px; margin-bottom:5%">
+<div id="weatherBox" class="weatherBox">
 	<table style="text-align:center; margin-top:40px;">
 		<tr>
-			<td rowspan="2" height="120px" width="300px">
-				<h1 id="printAvgTemp" style="font-size:100px;">
+			<td id="tdMargin" rowspan="2" height="120px">
+				<h1 id="printAvgTemp">
 				</h1>
 			</td>
-			<td width="200px">
-				<img src="frontend/img/wind_speed.png" alt="Wind Speed" width="100">
+			<td width="33%">
+				<img class="imgResp" src="frontend/img/wind_speed.png" alt="Wind Speed">
 			</td>
-			<td width="200px">
-				<img src="frontend/img/humidity.png" alt="Humidity" width="100">
+			<td width="33%">
+				<img class="imgResp" src="frontend/img/humidity.png" alt="Humidity">
 			</td>
-			<td width="200px">
-				<img src="frontend/img/pressure.png" alt="Pressure" width="100">
+			<td width="33%">
+				<img class="imgResp" src="frontend/img/pressure.png" alt="Pressure">
 			</td>
 		</tr>
 		<tr style="font-size:20px;">
@@ -54,9 +54,9 @@
 
 
 <div class="row">
-	<div class="col-md-4">
+	<div class="col-md-4 col-sm-6" style="text-align: center;">
 		<!-- FIRST WEATHER BOX -->
-		<div id="weatherBox">
+		<div class="weatherBox">
 			<p><strong>Apixu</strong></p>
 			<table>
 				<tr>
@@ -116,9 +116,9 @@
 			</table>
 		</div>
 	</div>
-	<div class="col-md-4">
+	<div class="col-md-4 col-sm-6" style="text-align: center;">
 		<!-- SECOND WEATHER BOX -->
-		<div id="weatherBox">
+		<div class="weatherBox">
 			<p><strong>OpenWeatherMap</strong></p>
 			<table>
 				<tr>
@@ -178,9 +178,9 @@
 			</table>
 		</div>
 	</div>
-  	<div class="col-md-4">
+  	<div class="col-md-4 col-sm-6" style="text-align: center;">
 		<!-- THIRD WEATHER BOX -->
-		<div id="weatherBox">
+		<div class="weatherBox">
 			<p><strong>Yahoo</strong></p>
 			<table>
 				<tr>

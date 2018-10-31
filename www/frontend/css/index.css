@@ -86,14 +86,11 @@ label[for="search"] {
 	margin: 0 12%;
 }*/
 
-.box3 {
-
-}
-
-#weatherBox{
+.weatherBox {
+  display: inline-block;
 	width:300px;
 	height:550px;
-	overflow: hidden;
+  overflow: hidden;
 	border-style:solid;
 	border-color:#666666;
 	border-width:2px;
@@ -103,38 +100,71 @@ label[for="search"] {
 	transition: .4s ease;
 }
 
-#weatherBox:hover {
+#weatherBox{
+  height: 220px;
+  width:100%;
+  margin-bottom:5%
+}
+
+#printAvgTemp {
+  font-size:100px;
+}
+
+.imgResp {
+  width: 100px;
+}
+
+.weatherBox:hover {
     background-color:rgba(255,255,255,0.9);
 	transition: .4s ease;
 }
 
-#weatherBox p{
+.weatherBox p{
 	color:#333333;
 	text-align: center;
 }
 
-#weatherBox p1{
+.weatherBox p1{
 	font-size:20px;
 	color:#333333;
 }
 
-#weatherBox p2{
+.weatherBox p2{
 	font-size:30px;
 	color:#333333;
 }
 
-#weatherBox td{
+.weatherBox td{
 	color:#aaaaaa;
 }
 
-#weatherBox h1{
+.weatherBox h1{
 	color:#333333;
 	text-align: center;
 	font-size:70px;
 	margin: auto;
-	margin-left:50px;
 }
 
+#tdMargin {
+  padding-left: 5em;
+}
+
+@media only screen and (max-width: 540px) {
+  #weatherBox {
+      overflow: scroll;
+      padding: 0;
+  }
+  #printAvgTemp {
+    font-size:50px;
+  }
+  .imgResp {
+    width: 40px;
+  }
+  #tdMargin {
+    padding-left: 1em;
+  }
+  
+}
 
 
 /* LOGIN MODAL */
