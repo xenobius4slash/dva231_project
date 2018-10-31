@@ -53,7 +53,54 @@ if( isset($_GET['page']) ) {
 } else {
 	if($isLogin) { $page = 'member'; $phpfile = true; } else { $page = 'home'; }
 }
+###########
+## error ##
+###########
+$Url = "HTTP://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+if (strpos($Url, "login_fail=1") == true )
+{
+	if(strpos($Url, "error_code=1") == true){
+		echo '<div class="alert alert-info">Wrong username or password</div>';
+	}
+	if(strpos($Url, "error_code=2") == true){
+		echo '<div class="alert alert-info">[Internal Error] #2 Try again later</div>';
+	}
+	if(strpos($Url, "error_code=3") == true){
+		echo '<div class="alert alert-info">[Internal Error] #3 Try again later</div>';
+	}
+	if(strpos($Url, "error_code=4") == true){
+		echo '<div class="alert alert-info">[Internal Error] #4 Try again later/div>';
+	}
+	
+}
 
+if (strpos($Url, "register_fail=1") == true )
+{
+	if(strpos($Url, "error_code=1") == true){
+		echo '<div class="alert alert-info">Invalid Email</div>';
+	}
+	if(strpos($Url, "error_code=2") == true){
+		echo '<div class="alert alert-info">Invalid Username</div>';
+	}
+	if(strpos($Url, "error_code=3") == true){
+		echo '<div class="alert alert-info">E-Mail address already in use</div>';
+	}
+	if(strpos($Url, "error_code=4") == true){
+		echo '<div class="alert alert-info">Invalid Password</div>';
+	}
+	if(strpos($Url, "error_code=5") == true){
+		echo '<div class="alert alert-info">Passwords do not match</div>';
+	}
+	if(strpos($Url, "error_code=6") == true){
+		echo '<div class="alert alert-info">[Internal Error] #3 Try again later</div>';
+	}
+	if(strpos($Url, "error_code=7") == true){
+		echo '<div class="alert alert-info">[Internal Error] #4 Try again later</div>';
+	}
+	if(strpos($Url, "error_code=8") == true){
+		echo '<div class="alert alert-info">[Internal Error] #5 Try again later</div>';
+	}
+}
 ##############
 ## skeleton ##
 ##############
