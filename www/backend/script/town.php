@@ -2,6 +2,7 @@
 /*
 *	classes
 */
+require_once CLASS_PATH.'User.php';
 require_once CLASS_PATH.'DatabaseTown.php';
 require_once CLASS_PATH.'WeatherServiceApixu.php';
 require_once CLASS_PATH.'WeatherServiceOpenWeatherMap.php';
@@ -85,6 +86,18 @@ if( !isset($_POST['town_search']) || !isset($_POST['town']) || (strlen($_POST['t
 				} else {
 					echo '<div class="alert alert-info">added new town</div>';
 				}
+			}
+
+			$USER = new User();
+			$settings = json_decode($USER->getUserSettings($userId),true);
+			if( $settings['unit'] == 'celsius') {
+				$WSA->setTempCelsius();
+				$WSOWM->setTempCelsius();
+				$WSY->setTempCelsius();
+			} else {
+				$WSA->setTempFahrenheit();
+				$WSOWM->setTempFahrenheit();
+				$WSY->setTempFahrenheit();
 			}
 		}
 
