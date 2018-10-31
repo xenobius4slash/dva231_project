@@ -7,7 +7,11 @@ require_once 'DatabaseWeatherDataCurrent.php';
 
 class Admin {
 
-	/* removes a registered user
+	public function getAllNotAdminUser() {
+		
+	}
+
+	/** removes a registered user
 	*	@param		$userId				Integer
 	*	@return		Array
 	*/
@@ -39,7 +43,7 @@ class Admin {
 		return $return;
 	}
 
-	/* removes all stored weather datas
+	/** removes all stored weather datas
 	*	@return		Bool
 	*/
 	public function removeAllWeatherDatas() {
@@ -47,14 +51,17 @@ class Admin {
 		return $DBWDC->deleteAllWeatherDatas();
 	}
 
-	/* removes all towns
-	*
+	/** removes all towns
+	*	@return		Bool
 	*/
 	public function removeAllTowns() {
 		$DBT = new DatabaseTown();
 		return $DBT->deleteAllTowns();
 	}
 
+	/** remove all towns and all weather datas
+	*	@return		Array
+	*/
 	public function removeAllTownsAndWeatherDatas() {
 		$return = array('status' => null, 'msg' => null);
 		if( !$this->removeAllTowns() ) {
@@ -68,6 +75,7 @@ class Admin {
 				$return['status'] = true;
 			}
 		}
+		return $return;
 	}
 	
 }

@@ -255,6 +255,11 @@ class User {
 			return false;
 		}
 	}
+
+	public function isAdmin($userId) {
+		$DBU = new DatabaseUser();
+		return $DBU->isAdminByUserId($userId);
+	}
 	
 }
 ?>
